@@ -1,0 +1,120 @@
+@import "../../../../variables.sass"
+
+div.task-card
+    width: 402px
+    height: 56px
+    border-radius: 14px
+    background: $white
+    background: $card-gradient
+    padding: 12px
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    align-items: stretch
+    gap: 6px
+    transition: all 0.5s ease
+    cursor: pointer
+    
+    &:hover
+        transform: scale(1.03)
+
+    &.ok, &.cancelled
+        text-decoration: line-through
+        opacity: 0.8
+
+
+    h5.task-card--title
+        font-size: 24px
+ 
+    div.task-card--content
+        flex-direction: row
+        display: flex
+        justify-content: space-between
+
+        div.task-card--content--left
+            text-transform: uppercase
+            display: flex
+            justify-content: left
+            gap: 8px
+
+            span
+                border-radius: 8px
+                background-color: blue
+                padding: 2px 8px
+                font-weight: bold   
+                font-size: 12px
+
+                &.color1
+                    background-color: $catcolor1
+
+                &.color2
+                    background-color: $catcolor2
+
+                &.color3
+                    background-color: $catcolor3
+
+                &.color4
+                    background-color: $catcolor4
+
+                &.color5
+                    background-color: $catcolor5
+
+                &.color6
+                    background-color: $catcolor6
+
+                &.color7
+                    background-color: $catcolor7
+
+                &.color8
+                    background-color: $catcolor8
+
+                &.color9
+                    background-color: $catcolor9
+
+                &.color10
+                    background-color: $catcolor10
+
+                &.color11
+                    background-color: $catcolor11
+
+                &.color12
+                    background-color: $catcolor12
+
+                &.color13
+                    background-color: $catcolor13
+
+                &.color14
+                    background-color: $catcolor14
+
+                &.color15
+                    background-color: $catcolor15
+
+                &.color16
+                    background-color: $catcolor16
+
+                &.color17
+                    background-color: $catcolor17
+
+                &.color18
+                    background-color: $catcolor18
+
+                &.color19
+                    background-color: $catcolor19
+
+                &.color20
+                    background-color: $catcolor20
+
+        div.task-card--content--right
+            font-weight: bold
+
+            span.ok
+                color: $green
+
+            span.warning
+                color: $yellow
+
+            span.cancelled
+                color: $purple
+            
+            span.toolate
+                color: $orange
