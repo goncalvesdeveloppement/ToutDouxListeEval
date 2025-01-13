@@ -1,0 +1,63 @@
+{
+    "tasks": [
+        {
+            "id": 1,
+            "name": "Tâche de test",
+            "description": "Cette tâche doit consister à tel truc.",
+            "deadline": "2025-01-14 00:00:00",
+            "status": "TODO"
+        },
+        {
+            "id": 2,
+            "name": "Tâche de test 2",
+            "description": "Cette tâche doit consister à tel truc évidemment.",
+            "deadline": "2025-01-15 00:00:00",
+            "status": "OK"
+        },
+        {
+            "id": 3,
+            "name": "Tâche de trois",
+            "description": "Cette tâche doit consister à tel truc, mais triplée.",
+            "deadline": "2025-01-15 17:00:00",
+            "status": "PROCESSING"
+        }
+    ],
+    "categories": [
+        {
+            "id": 1,
+            "name": "Pro",
+            "color": "blue"
+        },
+        {
+            "id": 2,
+            "name": "Perso",
+            "color": "green"
+        }
+    ],
+    "tasks_categories": [
+        {
+            "taskId": 1,
+            "categoryId": 2
+        },
+        {
+            "taskId": 3,
+            "categoryId": 1
+        }
+    ],
+    "users": [
+        {
+            "id": 1,
+            "email": "admin@toutdouxliste.fr",
+            "password": "1234",
+            "name": "Administrateur",
+            "isAdmin": true
+        },
+        {
+            "id": 2,
+            "email": "a.goncalves.pro@icloud.com",
+            "password": "abcd",
+            "name": "Anthony",
+            "isAdmin": false
+        }
+    ]
+}
