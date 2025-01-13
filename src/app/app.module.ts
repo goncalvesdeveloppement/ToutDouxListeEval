@@ -5,12 +5,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AddBoutonComponent } from './components/elements/add-bouton/add-bouton.component';
 import { TaskCardComponent } from './components/elements/task-card/task-card.component';
+import { DashboardComponent } from './components/views/dashboard/dashboard.component';
+import { DashboardGroupComponent } from './components/elements/dashboard-group/dashboard-group.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddBoutonComponent,
-    TaskCardComponent
+    TaskCardComponent,
+    DashboardComponent,
+    DashboardGroupComponent
   ],
   imports: [
     BrowserModule,

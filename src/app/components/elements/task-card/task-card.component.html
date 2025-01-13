@@ -1,12 +1,15 @@
-<div class="task-card ok">
-    <h5 class="task-card--title">Appeler Jean-Bernard</h5>
-    <div class="task-card--content">
-      <div class="task-card--content--left">
-        <span class="category color1">Pro</span>
-        <span class="category color8">Perso</span>
-      </div>
-      <div class="task-card--content--right">
-        <span class="ok">Terminé.</span>
+<div class="task-card" [ngClass]="(cssClass == 'ok' || cssClass == 'cancelled' ? 'ok' : '')">
+  <h5 class="task-card--title">{{ taskTitle }}</h5>
+  <div class="task-card--content">
+    <div class="task-card--content--left">
+      <div *ngFor="let category of categories">
+        <span class="category" [ngClass]="'color' + category">Cat. {{ category }}</span>
       </div>
     </div>
+    <div class="task-card--content--right">
+      <span *ngIf="cssClass == 'ok'" [ngClass]="cssClass">Terminé.</span>
+      <span *ngIf="cssClass == 'cancelled'" [ngClass]="cssClass">Abandonné.</span>
+      <span *ngIf="cssClass != 'ok' && cssClass != 'cancelled'" [ngClass]="cssClass">{{ deadlineString }}</span>
+    </div>
   </div>
+</div>
