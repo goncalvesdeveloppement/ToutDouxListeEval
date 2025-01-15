@@ -15,6 +15,34 @@ h3
 h1, h2, h3, h4, h5, h6
     margin: 0
 
+button
+
+button
+    font-family: $default-font
+    font-size: 18px
+    color: $white
+    background-color: $red
+    border: 0
+    border-radius: 6px
+    padding: 6px 16px
+    cursor: pointer
+    transition: all 0.5s ease
+
+    &:hover
+        background-color: $lightred
+
+    &.black
+        background-color: $black
+
+    &.black:hover
+        background-color: $lightgray
+
+    &.secondary
+        background-color: transparent
+        color: $black
+        margin-top: -8px
+    
+
 @media(max-width: 880px)
     #Header
         display: flex

@@ -8,10 +8,12 @@ import { Category } from 'src/app/model/category.model';
 })
 export class TaskCardComponent implements OnInit {
   now: Date = new Date(Date.now());
+  @Input() id: number;
   @Input() taskTitle: string = "Nouvelle tâche";
   @Input() deadline: Date = new Date();
   @Input() deadlineString: string = "";
   @Input() status: string = "TODO";
+  @Input() description: string;
   @Input() categories: Category[] = [];
 
   readonly DAYS_TO_WARNING: number = 3;

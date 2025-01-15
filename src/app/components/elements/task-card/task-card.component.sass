@@ -14,9 +14,18 @@ div.task-card
     gap: 6px
     transition: all 0.5s ease
     cursor: pointer
+
+    button 
+        display: none
     
     &:hover
         transform: scale(1.03)
+
+        button
+            display: block
+
+        span
+            display: none
 
     &.ok, &.cancelled
         text-decoration: line-through
@@ -105,6 +114,10 @@ div.task-card
 
         div.task-card--content--right
             font-weight: bold
+
+            .buttons
+                display: flex
+                gap: 8px
 
             span.ok
                 color: $green

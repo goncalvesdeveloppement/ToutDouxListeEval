@@ -11,7 +11,9 @@ export class DashboardGroupComponent implements OnInit {
   @Input() groupTitle: string = '';
   @Input() tasks: Task[] = [];
   preparedTasks: {
+    id: number;
     name: string;
+    description: string;
     deadline: Date;
     status: string;
     categories: Category[];
@@ -33,7 +35,9 @@ export class DashboardGroupComponent implements OnInit {
       );
 
       return {
+        id: task.id,
         name: task.name,
+        description: task.description,
         deadline: task.deadline,
         status: task.status,
         categories: task.categories,

@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LogoutButtonComponent } from './components/elements/logout-button/logout-button.component';
 import { LogoutComponent } from './components/views/logout/logout.component';
 import { NotFoundComponent } from './components/views/not-found/not-found.component';
+import { TaskComponent } from './components/views/task/task.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { NotFoundComponent } from './components/views/not-found/not-found.compon
     LoginComponent,
     LogoutButtonComponent,
     LogoutComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    TaskComponent
   ],
   imports: [
     HttpClientModule,

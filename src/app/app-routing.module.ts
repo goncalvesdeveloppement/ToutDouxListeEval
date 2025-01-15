@@ -4,6 +4,7 @@ import { DashboardComponent } from './components/views/dashboard/dashboard.compo
 import { LoginComponent } from './components/views/login/login.component';
 import { LogoutComponent } from './components/views/logout/logout.component';
 import { NotFoundComponent } from './components/views/not-found/not-found.component';
+import { TaskComponent } from './components/views/task/task.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,10 @@ const routes: Routes = [
   {
     path: 'auth',
     component: LoginComponent
+  },
+  {
+    path: 'task/:id',
+    component: TaskComponent
   },
   {
     path: '',

@@ -1,4 +1,5 @@
-<div class="task-card" [ngClass]="(cssClass == 'ok' || cssClass == 'cancelled' ? 'ok' : '')">
+<div title="{{ description }}" class="task-card" [ngClass]="(cssClass == 'ok' || cssClass == 'cancelled' ? 'ok' : '')"
+  routerLink="/task/{{ id }}">
   <h5 class="task-card--title">{{ taskTitle }}</h5>
   <div class="task-card--content">
     <div class="task-card--content--left">
@@ -7,6 +8,14 @@
       </div>
     </div>
     <div class="task-card--content--right">
+      <div class="buttons">
+        <button>
+          ✅ Marquer
+        </button>
+        <button>
+          ✏ Modifier
+        </button>
+      </div>
       <span *ngIf="cssClass == 'ok'" [ngClass]="cssClass">Terminé.</span>
       <span *ngIf="cssClass == 'cancelled'" [ngClass]="cssClass">Abandonné.</span>
       <span *ngIf="cssClass != 'ok' && cssClass != 'cancelled'" [ngClass]="cssClass">{{ deadlineString }}</span>

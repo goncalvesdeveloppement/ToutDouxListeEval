@@ -46,7 +46,7 @@ export class ApiService {
   }
 
   public getTask(user: User, id: number) {
-    return this.http.get<Task>(environment.host + "/task?id=" + id + "&owner=" + user.id);
+    return this.http.get<Task>(environment.host + "/tasks?id=" + id + "&owner=" + user.id);
   }
 
   public getCategories(user: User) {
@@ -54,7 +54,7 @@ export class ApiService {
   }
 
   public getCategory(user: User, id: number) {
-    return this.http.get<Category>(environment.host + "/category?id=" + id + "&owner=" + user.id);
+    return this.http.get<Category>(environment.host + "/categories?id=" + id + "&owner=" + user.id);
   }
 
   public getLoggedUser(email: string, password: string) {

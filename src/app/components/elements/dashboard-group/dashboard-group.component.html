@@ -1,7 +1,7 @@
 <div class="dashboard--group" *ngIf="isGroupVisible">
   <h3 class="dashboard--group--title">{{ groupTitle }}</h3>
   <div class="dashboard--group--content">
-    <app-task-card *ngFor="let task of preparedTasks" [taskTitle]="task.name" [deadline]="task.deadline"
+    <app-task-card *ngFor="let task of preparedTasks" [id]="task.id" [description]="task.description" [taskTitle]="task.name" [deadline]="task.deadline"
       [status]="task.status" [categories]="task.categories" [ngStyle]="{
         'display': task.display ? 'block' : 'none',
         'order': task.order
