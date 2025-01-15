@@ -3,6 +3,12 @@
 <app-add-bouton></app-add-bouton>
 
 <div id="Dashboard">
-    <app-dashboard-group [groupTitle]="'Cette semaine'"></app-dashboard-group>
-    <app-dashboard-group [groupTitle]="'Semaine prochaine'"></app-dashboard-group>
+    <ng-container *ngIf="taskList && taskList.length; else noTasks">
+        <app-dashboard-group *ngFor="let group of groupedTasks | keyvalue" [groupTitle]="group.key"
+            [tasks]="group.value" [ngStyle]="getGroupOrderStyle(group.key)">
+        </app-dashboard-group>
+    </ng-container>
+    <ng-template #noTasks>
+        <p>Aucune tâche à afficher pour le moment.</p>
+    </ng-template>
 </div>

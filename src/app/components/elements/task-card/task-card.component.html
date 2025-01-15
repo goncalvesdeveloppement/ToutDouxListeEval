@@ -3,7 +3,7 @@
   <div class="task-card--content">
     <div class="task-card--content--left">
       <div *ngFor="let category of categories">
-        <span class="category" [ngClass]="'color' + category">Cat. {{ category }}</span>
+        <span class="category" [ngClass]="'color' + category.color">{{ category.name }}</span>
       </div>
     </div>
     <div class="task-card--content--right">

@@ -1,7 +1,11 @@
-<div class="dashboard--group">
-    <h3 class="dashboard--group--title">{{ groupTitle }}</h3>
-    <div class="dashboard--group--content">
-        <app-task-card [taskTitle]="'Tester l\'app Spring Boot'" [deadlineString]="'2025-01-13T12:00:00'" [status]="'CANCELLED'" [categories]="[2, 9]"></app-task-card>
-        <app-task-card [taskTitle]="'Tester l\'app Angular'" [deadlineString]="'2025-01-14T12:00:00'"></app-task-card>
-    </div>
+<div class="dashboard--group" *ngIf="isGroupVisible">
+  <h3 class="dashboard--group--title">{{ groupTitle }}</h3>
+  <div class="dashboard--group--content">
+    <app-task-card *ngFor="let task of preparedTasks" [taskTitle]="task.name" [deadline]="task.deadline"
+      [status]="task.status" [categories]="task.categories" [ngStyle]="{
+        'display': task.display ? 'block' : 'none',
+        'order': task.order
+      }">
+    </app-task-card>
   </div>
+</div>

@@ -7,6 +7,7 @@ import { AddBoutonComponent } from './components/elements/add-bouton/add-bouton.
 import { TaskCardComponent } from './components/elements/task-card/task-card.component';
 import { DashboardComponent } from './components/views/dashboard/dashboard.component';
 import { DashboardGroupComponent } from './components/elements/dashboard-group/dashboard-group.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,8 +18,9 @@ import { DashboardGroupComponent } from './components/elements/dashboard-group/d
     DashboardGroupComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule
+    HttpClientModule,
+    AppRoutingModule,
+    BrowserModule
   ],
   providers: [],
   bootstrap: [AppComponent]
