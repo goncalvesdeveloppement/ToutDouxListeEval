@@ -1,0 +1,66 @@
+@import "../../../../variables.sass"
+
+form
+    width: 512px
+    position: fixed
+    margin: calc(50% - 288px)
+    border-radius: 14px
+    background: $white
+    background: $card-gradient    
+    padding: 12px
+
+    div.form-group
+        display: flex
+        flex-direction: column
+        gap: 8px
+        align-items: stretch
+
+p
+    text-align: center
+
+input
+    border: 0
+    height: 32px
+    border-bottom: 1px solid $white
+    background-color: transparent
+    text-align: center
+    border-radius: 0
+    font-size: 18px
+    margin-bottom: 14px
+    font-family: $default-font
+    color: $white
+
+    &::placeholder
+        color: $lightgray
+
+input.ng-invalid.ng-touched
+    color: $red
+
+div.bottom-buttons
+    flex-direction: column
+    display: flex
+    gap: 8px
+
+
+#BadCredentials
+    color:$red
+    font-weight: bold
+
+button
+    font-family: $default-font
+    font-size: 18px
+    color: white
+    background-color: $red
+    border: 0
+    border-radius: 6px
+    padding: 6px 16px
+    cursor: pointer
+    transition: all 0.5s ease
+
+    &:hover
+        background-color: $lightred
+
+    &.secondary
+        background-color: transparent
+        color: $black
+        margin-top: -8px

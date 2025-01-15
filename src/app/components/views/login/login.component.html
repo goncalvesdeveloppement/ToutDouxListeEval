@@ -1,0 +1,17 @@
+<h1>Connexion</h1>
+
+<form (ngSubmit)="onCredentialsSubmit()">
+    <div class="form-group">
+        <input type="text" placeholder="E-mail" [(ngModel)]="email" required class="form-control" name="email">
+        <input type="password" placeholder="Mot de passe" [(ngModel)]="password" required class="form-control"
+            name="password">
+    </div>
+
+    <div *ngIf="loginError" id="BadCredentials">Veuillez vérifier les informations saisies.</div>
+
+    <div class="bottom-buttons">
+        <button type="submit" class="btn btn-success">🤵🏻 Connexion</button>
+        <button class="secondary" routerLink="/">↩ Retour à l'accueil</button>
+        <!-- <button routerLink="/register" class="btn btn-outline-primary">Créer un compte</button> -->
+    </div>
+</form>

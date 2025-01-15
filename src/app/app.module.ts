@@ -8,6 +8,10 @@ import { TaskCardComponent } from './components/elements/task-card/task-card.com
 import { DashboardComponent } from './components/views/dashboard/dashboard.component';
 import { DashboardGroupComponent } from './components/elements/dashboard-group/dashboard-group.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './components/views/login/login.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LogoutButtonComponent } from './components/elements/logout-button/logout-button.component';
+import { LogoutComponent } from './components/views/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -15,12 +19,17 @@ import { HttpClientModule } from '@angular/common/http';
     AddBoutonComponent,
     TaskCardComponent,
     DashboardComponent,
-    DashboardGroupComponent
+    DashboardGroupComponent,
+    LoginComponent,
+    LogoutButtonComponent,
+    LogoutComponent
   ],
   imports: [
     HttpClientModule,
     AppRoutingModule,
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

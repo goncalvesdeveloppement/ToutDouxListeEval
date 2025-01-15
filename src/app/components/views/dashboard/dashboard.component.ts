@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Category } from 'src/app/model/category.model';
 import { TaskCategory } from 'src/app/model/task-category.model';
 import { Task } from 'src/app/model/task.model';
+import { User } from 'src/app/model/user.model';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -17,6 +18,7 @@ export class DashboardComponent implements OnInit {
   categories: Category[] | undefined = [];
   groupedTasks: { [key: string]: Task[] } = {};
   error: string | null = null;
+  user: User;
 
   constructor(private api: ApiService, private auth: AuthService) { }
 
@@ -25,7 +27,8 @@ export class DashboardComponent implements OnInit {
   }
 
   getAllTasks() {
-    this.api.getTasksWithCategories(this.auth.loggedUser).subscribe({
+    this.user = this.auth.loggedUser;
+    this.api.getTasksWithCategories(this.user).subscribe({
       next: (tasks) => {
         this.taskList = tasks; // Assigne le tableau de tâches à taskList
       },
@@ -37,7 +40,7 @@ export class DashboardComponent implements OnInit {
         console.log('Tâches récupérées avec succès', this.taskList);
 
         // Appel à getCategories pour récupérer les catégories
-        this.api.getCategories(this.auth.loggedUser).subscribe({
+        this.api.getCategories(this.user).subscribe({
           next: (categories) => {
             this.categories = categories; // Assigne les catégories récupérées à categories
             console.log('Catégories récupérées', this.categories);

@@ -1,0 +1,2 @@
+<button routerLink="/logout" *ngIf="user.id > 0">Déconnexion</button>
+<button routerLink="/auth" *ngIf="user.id == 0">Connexion</button>

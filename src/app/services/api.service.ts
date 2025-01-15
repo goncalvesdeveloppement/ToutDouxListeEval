@@ -61,7 +61,7 @@ export class ApiService {
     console.log(environment.host + "/users/?email=" + encodeURI(email) + "&password=" + encodeURI(password));
 
     return this.http.get<User[]>(environment.host + "/users/?email=" + encodeURI(email) + "&password=" + encodeURI(password)).pipe(
-      map(users => users.length > 0 ? users[0] : new User(0, "", "", ["VISITOR"])) // Retourne le premier utilisateur ou undefined
+      map(users => users.length > 0 ? users[0] : new User(0, "", "", "", ["VISITOR"])) // Retourne le premier utilisateur ou undefined
     );
   }
 }
