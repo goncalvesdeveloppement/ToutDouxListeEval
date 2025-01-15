@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/views/dashboard/dashboard.component';
 import { LoginComponent } from './components/views/login/login.component';
 import { LogoutComponent } from './components/views/logout/logout.component';
+import { NotFoundComponent } from './components/views/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -10,18 +11,26 @@ const routes: Routes = [
     component: DashboardComponent
   },
   {
+    path: 'auth',
+    component: LoginComponent
+  },
+  {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full'
   },
   {
-    path: 'auth',
-    component: LoginComponent
-  },
-  {
     path: 'logout',
     component: LogoutComponent
   },
+  {
+    path: '404',
+    component: NotFoundComponent
+  },
+  {
+    path: '**',
+    redirectTo: '/404'
+  }
 ];
 
 @NgModule({

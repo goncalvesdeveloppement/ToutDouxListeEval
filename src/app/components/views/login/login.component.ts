@@ -19,9 +19,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.authService.checkLoginStatus()) {
-      this.router.navigateByUrl("/cart");
-    }
   }
 
   onCredentialsSubmit() {

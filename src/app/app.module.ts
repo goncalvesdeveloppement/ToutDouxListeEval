@@ -12,6 +12,7 @@ import { LoginComponent } from './components/views/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LogoutButtonComponent } from './components/elements/logout-button/logout-button.component';
 import { LogoutComponent } from './components/views/logout/logout.component';
+import { NotFoundComponent } from './components/views/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { LogoutComponent } from './components/views/logout/logout.component';
     DashboardGroupComponent,
     LoginComponent,
     LogoutButtonComponent,
-    LogoutComponent
+    LogoutComponent,
+    NotFoundComponent
   ],
   imports: [
     HttpClientModule,
