@@ -2,3 +2,40 @@
     <h2>{{ currentTask.name }}</h2>
     <h4>{{ currentTask.description }}</h4>
 </div>
+<form [formGroup]="myForm" (ngSubmit)="onSaveTask(myForm)">
+    <div class="form-group">
+        <input type="hidden" [value]="currentTask.id" formControlName="id">
+        <input type="hidden" [value]="auth.loggedUser.id" formControlName="owner">
+        <input type="text" placeholder="Titre de la tâche" formControlName="name" required class="form-control" [value]="currentTask.name">
+        <input type="text" placeholder="Description" formControlName="description" required class="form-control" [value]="currentTask.description">
+    </div>
+    <div class="form-group">
+        <input type="datetime-local" placeholder="Date limite" formControlName="deadline" required class="form-control" [value]="currentTask.deadline">
+    </div>
+    <div class="form-group">
+        <select placeholder="État de la tâche" formControlName="status" required class="form-control" [value]="currentTask.status">
+            <option value="TODO">À faire</option>
+            <option value="PROCESSING">En cours</option>
+            <option value="OK">Terminé</option>
+            <option value="CANCELLED">Abandonné</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Catégories :</label>
+        <div class="categories-container">
+            <span 
+                *ngFor="let category of categories" 
+                [class.selected]="isCategorySelected(category.id)"
+                (click)="toggleCategory(category.id)"
+                class="category-item" class="color{{ category.color }}">
+                {{ category.name }}
+        </span>
+        </div>
+    </div>
+
+    <div class="bottom-buttons">
+        <button [disabled]="!myForm.valid" type="submit" class="btn btn-success">✔ Valider</button>
+        <button routerLink="/cart">↩ Retour</button>
+        <button class="secondary" routerLink="/cart">⚙ Modifier les catégories</button>
+    </div>
+</form>

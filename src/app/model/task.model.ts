@@ -6,14 +6,16 @@ export class Task {
     description: string;
     deadline: Date;
     status: string;
-    categories: Category[]; // Nouvelles catégories associées
+    categories: Category[];
+    owner: number;
 
-    constructor(id: number, name: string, description: string, deadline: Date, status: string, categories: Category[] = []) {
+    constructor(id: number, name: string, description: string, deadline: Date, status: string, categories: Category[] = [], owner: number) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.deadline = deadline;
         this.status = status;
         this.categories = categories;
+        this.owner = owner;
     }
 }
