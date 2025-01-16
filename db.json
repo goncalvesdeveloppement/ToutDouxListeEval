@@ -6,7 +6,7 @@
             "description": "Analyser les données et finaliser le rapport mensuel.",
             "status": "PROCESSING",
             "deadline": "2025-01-16T10:30:00",
-            "owner": 2
+            "owner": 0
         },
         {
             "id": 2,
@@ -14,7 +14,7 @@
             "description": "Révision du code pour le projet de l'interface utilisateur.",
             "status": "TODO",
             "deadline": "2025-01-17T12:00:00",
-            "owner": 2
+            "owner": 0
         },
         {
             "id": 3,
@@ -22,7 +22,7 @@
             "description": "Mettre à jour les endpoints et exemples dans la documentation.",
             "status": "OK",
             "deadline": "2025-01-14T14:00:00",
-            "owner": 2
+            "owner": 0
         },
         {
             "id": 4,
@@ -30,7 +30,7 @@
             "description": "Réunion pour discuter de l'avancement du projet.",
             "status": "CANCELLED",
             "deadline": "2025-01-15T16:00:00",
-            "owner": 2
+            "owner": 0
         },
         {
             "id": 5,
@@ -38,7 +38,7 @@
             "description": "Analyser les retours des utilisateurs de la dernière version.",
             "status": "TODO",
             "deadline": "2025-01-19T09:00:00",
-            "owner": 2
+            "owner": 0
         },
         {
             "id": 6,
@@ -46,7 +46,7 @@
             "description": "Corriger les bugs identifiés lors de la dernière révision.",
             "status": "PROCESSING",
             "deadline": "2025-01-18T10:00:00",
-            "owner": 2
+            "owner": 0
         },
         {
             "id": 7,
@@ -54,7 +54,7 @@
             "description": "Préparer une présentation pour le meeting client.",
             "status": "OK",
             "deadline": "2025-01-13T08:30:00",
-            "owner": 2
+            "owner": 0
         },
         {
             "id": 8,
@@ -62,7 +62,7 @@
             "description": "Améliorer les performances de la base de données.",
             "status": "CANCELLED",
             "deadline": "2025-01-10T11:00:00",
-            "owner": 2
+            "owner": 0
         },
         {
             "id": 9,
@@ -70,7 +70,7 @@
             "description": "Rédiger les spécifications techniques pour le nouveau module.",
             "status": "TODO",
             "deadline": "2025-01-20T14:00:00",
-            "owner": 2
+            "owner": 0
         },
         {
             "id": 10,
@@ -78,7 +78,7 @@
             "description": "Analyser le design pour les prochaines versions.",
             "status": "OK",
             "deadline": "2025-01-11T15:30:00",
-            "owner": 2
+            "owner": 0
         },
         {
             "id": 11,
@@ -166,91 +166,91 @@
             "id": 1,
             "name": "Développement",
             "color": 1,
-            "owner": 2
+            "owner": 0
         },
         {
             "id": 2,
             "name": "Design",
             "color": 2,
-            "owner": 2
+            "owner": 0
         },
         {
             "id": 3,
             "name": "Marketing",
             "color": 3,
-            "owner": 2
+            "owner": 0
         },
         {
             "id": 4,
             "name": "Gestion",
             "color": 4,
-            "owner": 2
+            "owner": 0
         },
         {
             "id": 5,
             "name": "Communication",
             "color": 5,
-            "owner": 2
+            "owner": 0
         },
         {
             "id": 6,
             "name": "Recherche",
             "color": 6,
-            "owner": 2
+            "owner": 0
         },
         {
             "id": 7,
             "name": "Support",
             "color": 7,
-            "owner": 2
+            "owner": 0
         },
         {
             "id": 8,
             "name": "Testing",
             "color": 8,
-            "owner": 2
+            "owner": 0
         },
         {
             "id": 9,
             "name": "Stratégie",
             "color": 9,
-            "owner": 2
+            "owner": 0
         },
         {
             "id": 10,
             "name": "Backend",
             "color": 10,
-            "owner": 2
+            "owner": 0
         },
         {
             "id": 11,
             "name": "Frontend",
             "color": 11,
-            "owner": 2
+            "owner": 0
         },
         {
             "id": 12,
             "name": "DevOps",
             "color": 12,
-            "owner": 2
+            "owner": 0
         },
         {
             "id": 13,
             "name": "Production",
             "color": 13,
-            "owner": 2
+            "owner": 0
         },
         {
             "id": 14,
             "name": "UX/UI",
             "color": 14,
-            "owner": 2
+            "owner": 0
         },
         {
             "id": 15,
             "name": "Consulting",
             "color": 15,
-            "owner": 2
+            "owner": 0
         },
         {
             "id": 16,

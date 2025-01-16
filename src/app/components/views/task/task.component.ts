@@ -131,24 +131,24 @@ export class TaskComponent implements OnInit {
 
       if (form.value.id) {
         // Si une tâche existe déjà (ID non null), on effectue une mise à jour
-        // this.api.updateTask(task).subscribe({
-        //   next: () => {
-        //     this.router.navigateByUrl("/dashboard"); // Redirection après la mise à jour
-        //   },
-        //   error: (err) => {
-        //     console.error('Erreur lors de la mise à jour de la tâche :', err);
-        //   }
-        // });
+        this.api.updateTask(task).subscribe({
+          next: () => {
+            this.router.navigateByUrl("/dashboard"); // Redirection après la mise à jour
+          },
+          error: (err) => {
+            console.error('Erreur lors de la mise à jour de la tâche :', err);
+          }
+        });
       } else {
         // Si c'est une nouvelle tâche, on la crée
-        /*this.api.saveTask(task).subscribe({
+        this.api.saveTask(task).subscribe({
           next: () => {
             this.router.navigateByUrl("/dashboard"); // Redirection après la création
           },
           error: (err) => {
             console.error('Erreur lors de la création de la tâche :', err);
           }
-        });*/
+        });
       }
     } else {
       this.getFormValidationErrors();
