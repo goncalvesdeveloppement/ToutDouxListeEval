@@ -1,6 +1,7 @@
 <div id="Header">
     <h1 *ngIf="user.id == 0">Bonjour, cher invité.</h1>
     <h1 *ngIf="user.id != 0">Bonjour, {{ user.name }}.</h1>
+    <app-sort-switch [currentMode]="currentMode"></app-sort-switch>
 
     <app-add-bouton></app-add-bouton>
     <app-logout-button></app-logout-button>

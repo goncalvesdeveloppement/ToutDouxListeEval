@@ -1,0 +1,6 @@
+<h6>Organiser par :</h6>
+<div class="container">
+    <button (click)="switchTo('/dashboard')" [ngClass]="currentMode == 'week' ? 'active' : ''">Semaine</button>
+    <button (click)="switchTo('/dashboard/category')" [ngClass]="currentMode == 'category' ? 'active' : ''">Catégories</button>
+    <button (click)="switchTo('/dashboard/status')" [ngClass]="currentMode == 'status' ? 'active' : ''">État</button>
+</div>

@@ -14,6 +14,7 @@ import { LogoutButtonComponent } from './components/elements/logout-button/logou
 import { LogoutComponent } from './components/views/logout/logout.component';
 import { NotFoundComponent } from './components/views/not-found/not-found.component';
 import { TaskComponent } from './components/views/task/task.component';
+import { SortSwitchComponent } from './components/elements/sort-switch/sort-switch.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { TaskComponent } from './components/views/task/task.component';
     LogoutButtonComponent,
     LogoutComponent,
     NotFoundComponent,
-    TaskComponent
+    TaskComponent,
+    SortSwitchComponent
   ],
   imports: [
     HttpClientModule,

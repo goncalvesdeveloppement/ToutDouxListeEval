@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Category } from 'src/app/model/category.model';
 import { TaskCategory } from 'src/app/model/task-category.model';
 import { Task } from 'src/app/model/task.model';
@@ -13,16 +14,18 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class DashboardComponent implements OnInit {
   taskList: Task[] | undefined = [];
-  currentMode: number = 0;
+  currentMode: string = "week";
   tasksCategories: TaskCategory[] | undefined = [];
   categories: Category[] | undefined = [];
   groupedTasks: { [key: string]: Task[] } = {};
   error: string | null = null;
   user: User;
 
-  constructor(private api: ApiService, private auth: AuthService) { }
+  constructor(private api: ApiService, private auth: AuthService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    if (this.route.snapshot.paramMap.get("mode"))
+      this.currentMode = this.route.snapshot.paramMap.get("mode").toLowerCase();
     this.getAllTasks();
   }
 
@@ -58,7 +61,7 @@ export class DashboardComponent implements OnInit {
 
                 // Appel de la fonction groupAllTasks pour grouper les tâches
                 if (this.taskList && this.categories && this.tasksCategories) {
-                  this.groupedTasks = this.groupAllTasks(this.currentMode, this.tasksCategories, this.categories);
+                  this.groupedTasks = this.groupAllTasks((this.currentMode == "week" ? 0 : (this.currentMode == "category" ? 1 : 2)), this.tasksCategories, this.categories);
                 }
               },
               error: (err) => {
@@ -74,7 +77,7 @@ export class DashboardComponent implements OnInit {
 
   getGroupOrderStyle(groupTitle: string) {
     // Retourne un style dynamique en fonction de la clé du groupe (groupTitle)
-    switch (this.currentMode) {
+    switch ((this.currentMode == "week" ? 0 : (this.currentMode == "category" ? 1 : 2))) {
       case 0: // Mode semaine
         return {
           'order': this.getWeekOrder(groupTitle)

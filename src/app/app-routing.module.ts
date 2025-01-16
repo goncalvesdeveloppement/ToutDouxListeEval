@@ -13,6 +13,10 @@ const routes: Routes = [
     component: DashboardComponent
   },
   {
+    path: 'dashboard/:mode',
+    component: DashboardComponent
+  },
+  {
     path: 'auth',
     component: LoginComponent
   },
