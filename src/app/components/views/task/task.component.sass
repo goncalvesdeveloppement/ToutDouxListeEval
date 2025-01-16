@@ -1,5 +1,51 @@
 @import "../../../../variables.sass"
 
+form
+    width: 512px
+    margin: 96px auto
+    border-radius: 14px
+    background: $white
+    background: $card-gradient    
+    padding: 12px
+
+    div.form-group
+        display: flex
+        flex-direction: column
+        gap: 8px
+        align-items: stretch
+        margin: 12px 0
+
+p
+    text-align: center
+
+input
+    border: 0
+    height: 32px
+    border-bottom: 1px solid $white
+    background-color: transparent
+    text-align: center
+    border-radius: 0
+    font-size: 18px
+    margin-bottom: 14px
+    font-family: $default-font
+    color: $white
+
+    &::placeholder
+        color: $lightgray
+
+input.ng-invalid.ng-touched
+    color: $red
+
+div.bottom-buttons
+    flex-direction: column
+    display: flex
+    gap: 8px
+
+
+#BadCredentials
+    color:$red
+    font-weight: bold
+
 .categories-container 
   display: flex
   flex-wrap: wrap
@@ -81,3 +127,28 @@ span
 
     &.color20
         background-color: $catcolor20
+
+.task-status-selector 
+    display: flex
+    gap: 10px
+    justify-content: flex-start
+
+
+.status-option 
+  padding: 10px 20px
+  border-radius: 5px
+  cursor: pointer
+  transition: background-color 0.3s, color 0.3s
+
+
+.status-option:hover 
+  background-color: #f0f0f0
+
+
+.status-option.selected 
+  background-color: #007bff
+  color: white
+
+
+.status-label 
+  font-weight: bold

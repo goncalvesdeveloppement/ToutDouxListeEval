@@ -46,10 +46,12 @@ export class ApiService {
   }
 
   public getTask(user: User, id: number) {
+    console.table(environment.host + "/tasks?id=" + id + "&owner=" + user.id);
     return this.http.get<Task>(environment.host + "/tasks?id=" + id + "&owner=" + user.id);
   }
 
   public getCategories(user: User) {
+    console.table(environment.host + "/categories?owner=" + user.id);
     return this.http.get<Category[]>(environment.host + "/categories?owner=" + user.id);
   }
 

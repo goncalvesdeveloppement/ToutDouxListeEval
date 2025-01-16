@@ -5,6 +5,7 @@ import { LoginComponent } from './components/views/login/login.component';
 import { LogoutComponent } from './components/views/logout/logout.component';
 import { NotFoundComponent } from './components/views/not-found/not-found.component';
 import { TaskComponent } from './components/views/task/task.component';
+import { LoggedUserGuard } from './guards/logged-user.guard';
 
 const routes: Routes = [
   {
@@ -17,6 +18,12 @@ const routes: Routes = [
   },
   {
     path: 'task/:id',
+    canActivate: [LoggedUserGuard],
+    component: TaskComponent
+  },
+  {
+    path: 'task',
+    canActivate: [LoggedUserGuard],
     component: TaskComponent
   },
   {

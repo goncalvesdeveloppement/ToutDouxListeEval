@@ -22,25 +22,30 @@ export class TaskComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (!this.auth.checkLoginStatus()) {
-      this.router.navigateByUrl("auth");
-    }
-
     this.myForm = this.fb.group({
       id: [null],
       owner: [null],
       name: [''],
       description: [''],
       deadline: [''],
-      status: [''],
+      status: ['TODO'],
       categories: [[]], // Initialise avec un tableau vide
     });
 
-    this.getTask();
+    // Si l'ID de la tâche existe dans l'URL, on charge les informations de la tâche
+    const taskId = this.route.snapshot.paramMap.get('id');
+    if (taskId) {
+      this.getTask(+taskId); // Récupère la tâche existante
+    } else {
+      // Aucune tâche existante, donc c'est une création
+      this.currentTask = new Task(null, "", "", new Date(), "TODO", [], this.auth.loggedUser.id);
+
+      this.loadCategories();
+    }
   }
 
-  getTask() {
-    this.api.getTask(this.auth.loggedUser, +this.route.snapshot.paramMap.get("id")).subscribe({
+  getTask(taskId: number) {
+    this.api.getTask(this.auth.loggedUser, taskId).subscribe({
       next: (tasks) => {
         this.currentTask = tasks[0] ?? undefined; // Assigne le tableau de tâches à taskList
 
@@ -61,20 +66,32 @@ export class TaskComponent implements OnInit {
             console.error('Erreur lors de la récupération des catégories :', err);
           },
           complete: () => {
-            this.myForm = new FormGroup({
-              id: new FormControl(this.currentTask.id),
-              owner: new FormControl(this.auth.loggedUser.id),
-              name: new FormControl(this.currentTask.name),
-              description: new FormControl(this.currentTask.description),
-              deadline: new FormControl(this.currentTask.deadline),
-              status: new FormControl(this.currentTask.status),
-              categories: new FormControl(this.currentTask.categories || []),
-            });
-
-            this.selectedCategories = this.currentTask.categories.map(c => c.id).map(Number);
+            if (this.currentTask) {
+              this.myForm.patchValue({
+                id: this.currentTask.id,
+                name: this.currentTask.name,
+                description: this.currentTask.description,
+                deadline: this.currentTask.deadline,
+                status: this.currentTask.status,
+                categories: this.currentTask.categories?.map(c => c.id) || []
+              });
+              this.selectedCategories = this.currentTask.categories?.map(c => c.id) || [];
+            }
+            this.loadCategories(); // Charge les catégories après avoir chargé la tâche
           }
         });
 
+      }
+    });
+  }
+
+  loadCategories() {
+    this.api.getCategories(this.auth.loggedUser).subscribe({
+      next: (categories) => {
+        this.categories = categories;
+      },
+      error: (err) => {
+        console.error('Erreur lors de la récupération des catégories :', err);
       }
     });
   }
@@ -97,7 +114,7 @@ export class TaskComponent implements OnInit {
       console.log(form.value);
 
       // Récupère les catégories complètes à partir des IDs sélectionnés
-      const selectedCategoryObjects = this.categories.filter(category => 
+      const selectedCategoryObjects = this.categories.filter(category =>
         this.selectedCategories.includes(category.id)
       );
 
@@ -112,10 +129,46 @@ export class TaskComponent implements OnInit {
         form.value.owner // ID du propriétaire (transmis automatiquement)
       );
 
-      //this.api.saveTask(task);
-      this.router.navigateByUrl("dashboard");
+      if (form.value.id) {
+        // Si une tâche existe déjà (ID non null), on effectue une mise à jour
+        // this.api.updateTask(task).subscribe({
+        //   next: () => {
+        //     this.router.navigateByUrl("/dashboard"); // Redirection après la mise à jour
+        //   },
+        //   error: (err) => {
+        //     console.error('Erreur lors de la mise à jour de la tâche :', err);
+        //   }
+        // });
+      } else {
+        // Si c'est une nouvelle tâche, on la crée
+        /*this.api.saveTask(task).subscribe({
+          next: () => {
+            this.router.navigateByUrl("/dashboard"); // Redirection après la création
+          },
+          error: (err) => {
+            console.error('Erreur lors de la création de la tâche :', err);
+          }
+        });*/
+      }
     } else {
       this.getFormValidationErrors();
+    }
+  }
+
+  // Fonction pour changer l'état de la tâche
+  setStatus(status: string) {
+    this.currentTask.status = status;
+    // Tu peux aussi ici appeler une fonction pour sauvegarder la tâche avec le nouvel état
+  }
+
+  // Fonction utilitaire pour afficher des libellés
+  getStatusLabel(status: string): string {
+    switch (status) {
+      case 'TODO': return 'À faire';
+      case 'PROCESSING': return 'En cours';
+      case 'OK': return 'Terminé';
+      case 'CANCELLED': return 'Abandonné';
+      default: return status;
     }
   }
 
