@@ -14,13 +14,13 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  saveTask(task: Task): Observable<Task> {
-    return this.http.put<Task>(`${environment.host}/tasks?id=${task.id}`, task);  
+  // Crée une nouvelle tâche en base de données (PUT)
+  createTask(task: Task): Observable<Task> {
+    return this.http.post<Task>(`${environment.host}/tasks`, task);
   }
 
   updateTask(task: Task): Observable<Task> {
-    return this.http.post<Task>(`${environment.host}/tasks?id=${task.id}`, task);  
-
+    return this.http.put<Task>(`${environment.host}/tasks/${task.id}`, task);
   }
 
   public getTasksWithCategories(user: User): Observable<Task[]> {

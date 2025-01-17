@@ -1,8 +1,8 @@
-<div *ngIf="currentTask">
-    <h2>{{ currentTask.name }}</h2>
+<div *ngIf="!isNewTask">
+    <h2>Mettre à jour '{{ currentTask.name }}'</h2>
     <h4>{{ currentTask.description }}</h4>
 </div>
-<div *ngIf="currentTask.id == null">
+<div *ngIf="isNewTask">
     <h2>Nouvelle tâche</h2>
 </div>
 <form [formGroup]="myForm" (ngSubmit)="onSaveTask(myForm)">

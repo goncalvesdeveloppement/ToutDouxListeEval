@@ -13,6 +13,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class TaskComponent implements OnInit {
   currentTask: Task;
+  isNewTask: boolean = true;
   categories: Category[];
   selectedCategories: number[] = [];
   myForm: FormGroup;
@@ -22,9 +23,12 @@ export class TaskComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    let defaultNewId: number = Math.floor(+new Date() / 1000);
+    let ownerId: number = this.auth.loggedUser.id ?? 0;
+
     this.myForm = this.fb.group({
-      id: [null],
-      owner: [null],
+      id: [defaultNewId],
+      owner: [ownerId],
       name: [''],
       description: [''],
       deadline: [''],
@@ -36,9 +40,10 @@ export class TaskComponent implements OnInit {
     const taskId = this.route.snapshot.paramMap.get('id');
     if (taskId) {
       this.getTask(+taskId); // Récupère la tâche existante
+      this.isNewTask = false;
     } else {
       // Aucune tâche existante, donc c'est une création
-      this.currentTask = new Task(null, "", "", new Date(), "TODO", [], this.auth.loggedUser.id);
+      this.currentTask = new Task(defaultNewId, "", "", new Date(), "TODO", [], ownerId);
 
       this.loadCategories();
     }
@@ -73,6 +78,7 @@ export class TaskComponent implements OnInit {
                 description: this.currentTask.description,
                 deadline: this.currentTask.deadline,
                 status: this.currentTask.status,
+                owner: this.auth.loggedUser.id,
                 categories: this.currentTask.categories?.map(c => c.id) || []
               });
               this.selectedCategories = this.currentTask.categories?.map(c => c.id) || [];
@@ -124,12 +130,12 @@ export class TaskComponent implements OnInit {
         form.value.name,
         form.value.description,
         form.value.deadline,
-        form.value.status,
+        this.currentTask.status,
         selectedCategoryObjects, // Tableau d'IDs des catégories
         form.value.owner // ID du propriétaire (transmis automatiquement)
       );
 
-      if (form.value.id) {
+      if (!this.isNewTask) {
         // Si une tâche existe déjà (ID non null), on effectue une mise à jour
         this.api.updateTask(task).subscribe({
           next: () => {
@@ -141,7 +147,7 @@ export class TaskComponent implements OnInit {
         });
       } else {
         // Si c'est une nouvelle tâche, on la crée
-        this.api.saveTask(task).subscribe({
+        this.api.createTask(task).subscribe({
           next: () => {
             this.router.navigateByUrl("/dashboard"); // Redirection après la création
           },
@@ -158,7 +164,7 @@ export class TaskComponent implements OnInit {
   // Fonction pour changer l'état de la tâche
   setStatus(status: string) {
     this.currentTask.status = status;
-    // Tu peux aussi ici appeler une fonction pour sauvegarder la tâche avec le nouvel état
+    console.log(this.currentTask);
   }
 
   // Fonction utilitaire pour afficher des libellés
