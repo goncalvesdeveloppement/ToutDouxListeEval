@@ -1,4 +1,4 @@
-package fr.toutdouxliste.fr.toutdouxliste.dao;
+package fr.toutdouxliste.dao;
 
 import fr.toutdouxliste.entities.Category;
 import org.springframework.data.jpa.repository.JpaRepository;

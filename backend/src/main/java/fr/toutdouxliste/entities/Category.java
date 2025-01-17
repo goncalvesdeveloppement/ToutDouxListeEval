@@ -1,9 +1,6 @@
 package fr.toutdouxliste.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +8,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Collection;
 
 @Entity
 @Data
@@ -30,6 +27,9 @@ public class Category implements Serializable {
 
     @Setter
     private int color;
+
+    @ManyToMany(mappedBy = "categories")
+    private Collection<Task> tasks;
 
     public Category(String name, int color) {
         this.setName(name);

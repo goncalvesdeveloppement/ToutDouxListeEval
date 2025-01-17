@@ -1,9 +1,6 @@
 package fr.toutdouxliste.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +8,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 
 @Entity
@@ -37,10 +35,21 @@ public class Task implements Serializable {
     @Setter
     private String status;
 
+    @ManyToMany
+    private Collection<Category> categories;
+
     public Task(String name, String description, Date deadline, String status) {
         this.setName(name);
         this.setDescription(description);
         this.setDeadline(deadline);
         this.setStatus(status);
+    }
+
+    public Task(String name, String description, Date deadline, String status, Collection<Category> categories) {
+        this.setName(name);
+        this.setDescription(description);
+        this.setDeadline(deadline);
+        this.setStatus(status);
+        this.setCategories(categories);
     }
 }
