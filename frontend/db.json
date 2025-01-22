@@ -1,391 +1,392 @@
 {
-    "tasks": [
-        {
-            "id": 1,
-            "name": "Finaliser le rapport de performance",
-            "description": "Analyser les données et finaliser le rapport mensuel.",
-            "status": "PROCESSING",
-            "deadline": "2025-01-16T10:30:00",
-            "owner": 0
-        },
-        {
-            "id": 2,
-            "name": "Revue du code frontend",
-            "description": "Révision du code pour le projet de l'interface utilisateur.",
-            "status": "TODO",
-            "deadline": "2025-01-17T12:00:00",
-            "owner": 0
-        },
-        {
-            "id": 3,
-            "name": "Mise à jour de la documentation API",
-            "description": "Mettre à jour les endpoints et exemples dans la documentation.",
-            "status": "OK",
-            "deadline": "2025-01-14T14:00:00",
-            "owner": 0
-        },
-        {
-            "id": 4,
-            "name": "Réunion de suivi projet",
-            "description": "Réunion pour discuter de l'avancement du projet.",
-            "status": "CANCELLED",
-            "deadline": "2025-01-15T16:00:00",
-            "owner": 0
-        },
-        {
-            "id": 5,
-            "name": "Analyse des retours utilisateurs",
-            "description": "Analyser les retours des utilisateurs de la dernière version.",
-            "status": "TODO",
-            "deadline": "2025-01-19T09:00:00",
-            "owner": 0
-        },
-        {
-            "id": 6,
-            "name": "Correction des bugs critiques",
-            "description": "Corriger les bugs identifiés lors de la dernière révision.",
-            "status": "PROCESSING",
-            "deadline": "2025-01-18T10:00:00",
-            "owner": 0
-        },
-        {
-            "id": 7,
-            "name": "Préparer la présentation pour le client",
-            "description": "Préparer une présentation pour le meeting client.",
-            "status": "OK",
-            "deadline": "2025-01-13T08:30:00",
-            "owner": 0
-        },
-        {
-            "id": 8,
-            "name": "Optimisation de la base de données",
-            "description": "Améliorer les performances de la base de données.",
-            "status": "CANCELLED",
-            "deadline": "2025-01-10T11:00:00",
-            "owner": 0
-        },
-        {
-            "id": 9,
-            "name": "Rédaction des spécifications techniques",
-            "description": "Rédiger les spécifications techniques pour le nouveau module.",
-            "status": "TODO",
-            "deadline": "2025-01-20T14:00:00",
-            "owner": 0
-        },
-        {
-            "id": 10,
-            "name": "Revue du design d'interface",
-            "description": "Analyser le design pour les prochaines versions.",
-            "status": "OK",
-            "deadline": "2025-01-11T15:30:00",
-            "owner": 0
-        },
-        {
-            "id": 11,
-            "name": "Planification des sprints",
-            "description": "Planification des sprints pour les 3 prochaines semaines.",
-            "status": "OK",
-            "deadline": "2025-01-16T09:00:00",
-            "owner": 2
-        },
-        {
-            "id": 12,
-            "name": "Préparation de la réunion stratégique",
-            "description": "Préparer les éléments pour la réunion stratégique avec la direction.",
-            "status": "TODO",
-            "deadline": "2025-01-22T10:30:00",
-            "owner": 2
-        },
-        {
-            "id": 13,
-            "name": "Analyse des performances serveur",
-            "description": "Analyser les logs du serveur et proposer des optimisations.",
-            "status": "PROCESSING",
-            "deadline": "2025-01-14T18:00:00",
-            "owner": 2
-        },
-        {
-            "id": 14,
-            "name": "Refactorisation du code backend",
-            "description": "Refactorer le code pour améliorer la lisibilité et la performance.",
-            "status": "TODO",
-            "deadline": "2025-01-25T11:00:00",
-            "owner": 2
-        },
-        {
-            "id": 15,
-            "name": "Écriture des tests unitaires",
-            "description": "Écrire des tests unitaires pour la nouvelle fonctionnalité.",
-            "status": "OK",
-            "deadline": "2025-01-12T17:00:00",
-            "owner": 2
-        },
-        {
-            "id": 16,
-            "name": "Réunion de feedback",
-            "description": "Réunion pour discuter des retours après la démo.",
-            "status": "PROCESSING",
-            "deadline": "2025-01-23T10:00:00",
-            "owner": 2
-        },
-        {
-            "id": 17,
-            "name": "Mise à jour du site web",
-            "description": "Effectuer des mises à jour sur le site web en fonction des retours.",
-            "status": "CANCELLED",
-            "deadline": "2025-01-09T14:00:00",
-            "owner": 2
-        },
-        {
-            "id": 18,
-            "name": "Tests de validation du produit",
-            "description": "Tester la dernière version du produit pour valider les fonctionnalités.",
-            "status": "TODO",
-            "deadline": "2025-01-28T09:30:00",
-            "owner": 2
-        },
-        {
-            "id": 19,
-            "name": "Rédaction des emails de marketing",
-            "description": "Rédiger les emails pour la campagne marketing.",
-            "status": "PROCESSING",
-            "deadline": "2025-01-15T13:00:00",
-            "owner": 2
-        },
-        {
-            "id": 20,
-            "name": "Analyse des tendances du marché",
-            "description": "Faire une étude des dernières tendances dans l'industrie.",
-            "status": "OK",
-            "deadline": "2025-01-08T12:30:00",
-            "owner": 2
-        }
-    ],
-    "categories": [
-        {
-            "id": 1,
-            "name": "Développement",
-            "color": 1,
-            "owner": 0
-        },
-        {
-            "id": 2,
-            "name": "Design",
-            "color": 2,
-            "owner": 0
-        },
-        {
-            "id": 3,
-            "name": "Marketing",
-            "color": 3,
-            "owner": 0
-        },
-        {
-            "id": 4,
-            "name": "Gestion",
-            "color": 4,
-            "owner": 0
-        },
-        {
-            "id": 5,
-            "name": "Communication",
-            "color": 5,
-            "owner": 0
-        },
-        {
-            "id": 6,
-            "name": "Recherche",
-            "color": 6,
-            "owner": 0
-        },
-        {
-            "id": 7,
-            "name": "Support",
-            "color": 7,
-            "owner": 0
-        },
-        {
-            "id": 8,
-            "name": "Testing",
-            "color": 8,
-            "owner": 0
-        },
-        {
-            "id": 9,
-            "name": "Stratégie",
-            "color": 9,
-            "owner": 0
-        },
-        {
-            "id": 10,
-            "name": "Backend",
-            "color": 10,
-            "owner": 0
-        },
-        {
-            "id": 11,
-            "name": "Frontend",
-            "color": 11,
-            "owner": 0
-        },
-        {
-            "id": 12,
-            "name": "DevOps",
-            "color": 12,
-            "owner": 0
-        },
-        {
-            "id": 13,
-            "name": "Production",
-            "color": 13,
-            "owner": 0
-        },
-        {
-            "id": 14,
-            "name": "UX/UI",
-            "color": 14,
-            "owner": 0
-        },
-        {
-            "id": 15,
-            "name": "Consulting",
-            "color": 15,
-            "owner": 0
-        },
-        {
-            "id": 16,
-            "name": "Architecture",
-            "color": 16,
-            "owner": 2
-        },
-        {
-            "id": 17,
-            "name": "Performance",
-            "color": 17,
-            "owner": 2
-        },
-        {
-            "id": 18,
-            "name": "SEO",
-            "color": 18,
-            "owner": 2
-        },
-        {
-            "id": 19,
-            "name": "Business",
-            "color": 19,
-            "owner": 2
-        },
-        {
-            "id": 20,
-            "name": "Cloud",
-            "color": 20,
-            "owner": 2
-        }
-    ],
-    "tasks_categories": [
-        {
-            "taskId": 1,
-            "categoryId": 1
-        },
-        {
-            "taskId": 1,
-            "categoryId": 2
-        },
-        {
-            "taskId": 2,
-            "categoryId": 3
-        },
-        {
-            "taskId": 2,
-            "categoryId": 1
-        },
-        {
-            "taskId": 3,
-            "categoryId": 4
-        },
-        {
-            "taskId": 3,
-            "categoryId": 5
-        },
-        {
-            "taskId": 4,
-            "categoryId": 6
-        },
-        {
-            "taskId": 4,
-            "categoryId": 7
-        },
-        {
-            "taskId": 5,
-            "categoryId": 8
-        },
-        {
-            "taskId": 6,
-            "categoryId": 10
-        },
-        {
-            "taskId": 7,
-            "categoryId": 11
-        },
-        {
-            "taskId": 8,
-            "categoryId": 12
-        },
-        {
-            "taskId": 9,
-            "categoryId": 13
-        },
-        {
-            "taskId": 9,
-            "categoryId": 14
-        },
-        {
-            "taskId": 10,
-            "categoryId": 15
-        },
-        {
-            "taskId": 11,
-            "categoryId": 16
-        },
-        {
-            "taskId": 12,
-            "categoryId": 17
-        },
-        {
-            "taskId": 13,
-            "categoryId": 18
-        },
-        {
-            "taskId": 14,
-            "categoryId": 19
-        },
-        {
-            "taskId": 15,
-            "categoryId": 20
-        }
-    ],
-    "users": [
-        {
-            "id": 1,
-            "email": "admin@toutdouxliste.fr",
-            "password": "1234",
-            "name": "Administrateur",
-            "roles": [
-                "VISITOR",
-                "USER",
-                "ADMIN"
-            ]
-        },
-        {
-            "id": 2,
-            "email": "a.goncalves.pro@icloud.com",
-            "password": "abcd",
-            "name": "Anthony",
-            "roles": [
-                "VISITOR",
-                "USER"
-            ]
-        }
-    ]
+  "tasks": [
+    {
+      "id": 1,
+      "name": "Finaliser le rapport de performance",
+      "description": "Analyser les données et finaliser le rapport mensuel.",
+      "status": "PROCESSING",
+      "deadline": "2025-01-16T10:30:00",
+      "owner": 0
+    },
+    {
+      "id": 2,
+      "name": "Revue du code frontend",
+      "description": "Révision du code pour le projet de l'interface utilisateur.",
+      "status": "TODO",
+      "deadline": "2025-01-17T12:00:00",
+      "owner": 0
+    },
+    {
+      "id": 3,
+      "name": "Mise à jour de la documentation API",
+      "description": "Mettre à jour les endpoints et exemples dans la documentation.",
+      "status": "OK",
+      "deadline": "2025-01-14T14:00:00",
+      "owner": 0
+    },
+    {
+      "id": 4,
+      "name": "Réunion de suivi projet",
+      "description": "Réunion pour discuter de l'avancement du projet.",
+      "status": "CANCELLED",
+      "deadline": "2025-01-15T16:00:00",
+      "owner": 0
+    },
+    {
+      "id": 5,
+      "name": "Analyse des retours utilisateurs",
+      "description": "Analyser les retours des utilisateurs de la dernière version.",
+      "status": "TODO",
+      "deadline": "2025-01-19T09:00:00",
+      "owner": 0
+    },
+    {
+      "id": 6,
+      "name": "Correction des bugs critiques",
+      "description": "Corriger les bugs identifiés lors de la dernière révision.",
+      "status": "PROCESSING",
+      "deadline": "2025-01-18T10:00:00",
+      "owner": 0
+    },
+    {
+      "id": 7,
+      "name": "Préparer la présentation pour le client",
+      "description": "Préparer une présentation pour le meeting client.",
+      "status": "OK",
+      "deadline": "2025-01-13T08:30:00",
+      "owner": 0
+    },
+    {
+      "id": 8,
+      "name": "Optimisation de la base de données",
+      "description": "Améliorer les performances de la base de données.",
+      "status": "CANCELLED",
+      "deadline": "2025-01-10T11:00:00",
+      "owner": 0
+    },
+    {
+      "id": 9,
+      "name": "Rédaction des spécifications techniques",
+      "description": "Rédiger les spécifications techniques pour le nouveau module.",
+      "status": "TODO",
+      "deadline": "2025-01-20T14:00:00",
+      "owner": 0
+    },
+    {
+      "id": 10,
+      "name": "Revue du design d'interface",
+      "description": "Analyser le design pour les prochaines versions.",
+      "status": "OK",
+      "deadline": "2025-01-11T15:30:00",
+      "owner": 0
+    },
+    {
+      "id": 11,
+      "name": "Planification des sprints",
+      "description": "Planification des sprints pour les 3 prochaines semaines.",
+      "status": "OK",
+      "deadline": "2025-01-16T09:00:00",
+      "owner": 2
+    },
+    {
+      "id": 12,
+      "name": "abc",
+      "description": "Préparer les éléments pour la réunion stratégique avec la direction.",
+      "deadline": "2025-01-22T10:30:00",
+      "status": "PROCESSING",
+      "categories": [],
+      "owner": 2
+    },
+    {
+      "id": 13,
+      "name": "Analyse des performances serveur",
+      "description": "Analyser les logs du serveur et proposer des optimisations.",
+      "status": "PROCESSING",
+      "deadline": "2025-01-14T18:00:00",
+      "owner": 2
+    },
+    {
+      "id": 14,
+      "name": "Refactorisation du code backend",
+      "description": "Refactorer le code pour améliorer la lisibilité et la performance.",
+      "status": "TODO",
+      "deadline": "2025-01-25T11:00:00",
+      "owner": 2
+    },
+    {
+      "id": 15,
+      "name": "Écriture des tests unitaires",
+      "description": "Écrire des tests unitaires pour la nouvelle fonctionnalité.",
+      "status": "OK",
+      "deadline": "2025-01-12T17:00:00",
+      "owner": 2
+    },
+    {
+      "id": 16,
+      "name": "Réunion de feedback",
+      "description": "Réunion pour discuter des retours après la démo.",
+      "status": "PROCESSING",
+      "deadline": "2025-01-23T10:00:00",
+      "owner": 2
+    },
+    {
+      "id": 17,
+      "name": "Mise à jour du site web",
+      "description": "Effectuer des mises à jour sur le site web en fonction des retours.",
+      "status": "CANCELLED",
+      "deadline": "2025-01-09T14:00:00",
+      "owner": 2
+    },
+    {
+      "id": 18,
+      "name": "Tests de validation du produit",
+      "description": "Tester la dernière version du produit pour valider les fonctionnalités.",
+      "status": "TODO",
+      "deadline": "2025-01-28T09:30:00",
+      "owner": 2
+    },
+    {
+      "id": 19,
+      "name": "Rédaction des emails de marketing",
+      "description": "Rédiger les emails pour la campagne marketing.",
+      "status": "PROCESSING",
+      "deadline": "2025-01-15T13:00:00",
+      "owner": 2
+    },
+    {
+      "id": 20,
+      "name": "Analyse des tendances du marché",
+      "description": "Faire une étude des dernières tendances dans l'industrie.",
+      "status": "OK",
+      "deadline": "2025-01-08T12:30:00",
+      "owner": 2
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Développement",
+      "color": 1,
+      "owner": 0
+    },
+    {
+      "id": 2,
+      "name": "Design",
+      "color": 2,
+      "owner": 0
+    },
+    {
+      "id": 3,
+      "name": "Marketing",
+      "color": 3,
+      "owner": 0
+    },
+    {
+      "id": 4,
+      "name": "Gestion",
+      "color": 4,
+      "owner": 0
+    },
+    {
+      "id": 5,
+      "name": "Communication",
+      "color": 5,
+      "owner": 0
+    },
+    {
+      "id": 6,
+      "name": "Recherche",
+      "color": 6,
+      "owner": 0
+    },
+    {
+      "id": 7,
+      "name": "Support",
+      "color": 7,
+      "owner": 0
+    },
+    {
+      "id": 8,
+      "name": "Testing",
+      "color": 8,
+      "owner": 0
+    },
+    {
+      "id": 9,
+      "name": "Stratégie",
+      "color": 9,
+      "owner": 0
+    },
+    {
+      "id": 10,
+      "name": "Backend",
+      "color": 10,
+      "owner": 0
+    },
+    {
+      "id": 11,
+      "name": "Frontend",
+      "color": 11,
+      "owner": 0
+    },
+    {
+      "id": 12,
+      "name": "DevOps",
+      "color": 12,
+      "owner": 0
+    },
+    {
+      "id": 13,
+      "name": "Production",
+      "color": 13,
+      "owner": 0
+    },
+    {
+      "id": 14,
+      "name": "UX/UI",
+      "color": 14,
+      "owner": 0
+    },
+    {
+      "id": 15,
+      "name": "Consulting",
+      "color": 15,
+      "owner": 0
+    },
+    {
+      "id": 16,
+      "name": "Architecture",
+      "color": 16,
+      "owner": 2
+    },
+    {
+      "id": 17,
+      "name": "Performance",
+      "color": 17,
+      "owner": 2
+    },
+    {
+      "id": 18,
+      "name": "SEO",
+      "color": 18,
+      "owner": 2
+    },
+    {
+      "id": 19,
+      "name": "Business",
+      "color": 19,
+      "owner": 2
+    },
+    {
+      "id": 20,
+      "name": "Cloud",
+      "color": 20,
+      "owner": 2
+    }
+  ],
+  "tasks_categories": [
+    {
+      "taskId": 1,
+      "categoryId": 1
+    },
+    {
+      "taskId": 1,
+      "categoryId": 2
+    },
+    {
+      "taskId": 2,
+      "categoryId": 3
+    },
+    {
+      "taskId": 2,
+      "categoryId": 1
+    },
+    {
+      "taskId": 3,
+      "categoryId": 4
+    },
+    {
+      "taskId": 3,
+      "categoryId": 5
+    },
+    {
+      "taskId": 4,
+      "categoryId": 6
+    },
+    {
+      "taskId": 4,
+      "categoryId": 7
+    },
+    {
+      "taskId": 5,
+      "categoryId": 8
+    },
+    {
+      "taskId": 6,
+      "categoryId": 10
+    },
+    {
+      "taskId": 7,
+      "categoryId": 11
+    },
+    {
+      "taskId": 8,
+      "categoryId": 12
+    },
+    {
+      "taskId": 9,
+      "categoryId": 13
+    },
+    {
+      "taskId": 9,
+      "categoryId": 14
+    },
+    {
+      "taskId": 10,
+      "categoryId": 15
+    },
+    {
+      "taskId": 11,
+      "categoryId": 16
+    },
+    {
+      "taskId": 12,
+      "categoryId": 17
+    },
+    {
+      "taskId": 13,
+      "categoryId": 18
+    },
+    {
+      "taskId": 14,
+      "categoryId": 19
+    },
+    {
+      "taskId": 15,
+      "categoryId": 20
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "email": "admin@toutdouxliste.fr",
+      "password": "1234",
+      "name": "Administrateur",
+      "roles": [
+        "VISITOR",
+        "USER",
+        "ADMIN"
+      ]
+    },
+    {
+      "id": 2,
+      "email": "a.goncalves.pro@icloud.com",
+      "password": "abcd",
+      "name": "Anthony",
+      "roles": [
+        "VISITOR",
+        "USER"
+      ]
+    }
+  ]
 }
