@@ -9,6 +9,9 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.util.Collection;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -26,10 +29,12 @@ public class Category implements Serializable {
     @Setter
     private int color;
 
+    @JsonManagedReference
     @ManyToMany(mappedBy = "categories")
     private Collection<Task> tasks;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    @ManyToOne
     private User owner;
 
     public Category(String name, int color, User owner) {

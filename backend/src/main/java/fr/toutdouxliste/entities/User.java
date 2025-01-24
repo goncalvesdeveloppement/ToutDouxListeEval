@@ -9,6 +9,8 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.util.Collection;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -30,9 +32,11 @@ public class User implements Serializable {
     @Setter
     private String password;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private Collection<Task> tasks;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private Collection<Category> categories;
 

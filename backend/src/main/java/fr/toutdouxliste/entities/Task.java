@@ -10,6 +10,9 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -33,9 +36,12 @@ public class Task implements Serializable {
     @Setter
     private String status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    @ManyToOne
     private User owner;
 
+    @JsonIgnore
+    @JsonManagedReference
     @ManyToMany(cascade = CascadeType.ALL)
     private Collection<Category> categories;
 
