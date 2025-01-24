@@ -32,27 +32,6 @@ public class ToutDouxListeBackendApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        // Persister l'utilisateur d'abord
-        User antho = userRepository.save(new User("Anthony", "a.goncalves.pro@icloud.com", "abcd"));
-        User momo = userRepository.save(new User("Mohamed", "test@test.test", "zzz"));
-
-        Category pro = new Category("Pro", 1);
-        Category tresPro = new Category("Très pro", 11);
-        categoryRepository.save(pro);
-        categoryRepository.save(tresPro);
-
-        pro.setOwner(antho);
-        categoryRepository.save(pro);
-        tresPro.setOwner(momo);
-        categoryRepository.save(tresPro);
-
-        Task scrum = new Task("Faire le scrum", "bah oui normal", new Date(), "TODO");
-        taskRepository.save(scrum);
-        ArrayList<Category> c = new ArrayList<Category>();
-        c.add(pro);
-        scrum.setCategories(c);
-        taskRepository.save(scrum);
-        scrum.setOwner(antho);
-        taskRepository.save(scrum);
+        
     }
 }

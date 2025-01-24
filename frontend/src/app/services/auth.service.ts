@@ -18,7 +18,7 @@ export class AuthService {
   }
 
   get loggedUser(): User {
-    return this.loggedUserSubject.value ?? new User(0, "", "", "", ["VISITOR"]);
+    return this.loggedUserSubject.value ?? new User(0, "", "", "");
   }
 
   setLoggedUser(user: User | null) {
@@ -30,7 +30,7 @@ export class AuthService {
 
     if (userData) {
       const parsedUser = JSON.parse(userData);
-      this.setLoggedUser(new User(parsedUser.id, parsedUser.email, parsedUser.password, parsedUser.name, parsedUser.roles));
+      this.setLoggedUser(new User(parsedUser.id, parsedUser.email, parsedUser.password, parsedUser.name));
     }
   }
 

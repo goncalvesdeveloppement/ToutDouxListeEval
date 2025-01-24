@@ -50,10 +50,6 @@ export class ApiService {
     return this.http.get<Task[]>(environment.host + "/tasks?owner=" + user.id);
   }
 
-  public getTasksCategories() {
-    return this.http.get<TaskCategory[]>(environment.host + "/tasks_categories");
-  }
-
   public getTask(user: User, id: number) {
     console.table(environment.host + "/tasks?id=" + id + "&owner=" + user.id);
     return this.http.get<Task>(environment.host + "/tasks?id=" + id + "&owner=" + user.id);
@@ -69,10 +65,8 @@ export class ApiService {
   }
 
   public getLoggedUser(email: string, password: string) {
-    console.log(environment.host + "/users/?email=" + encodeURI(email) + "&password=" + encodeURI(password));
-
-    return this.http.get<User[]>(environment.host + "/users/?email=" + encodeURI(email) + "&password=" + encodeURI(password)).pipe(
-      map(users => users.length > 0 ? users[0] : new User(0, "", "", "", ["VISITOR"])) // Retourne le premier utilisateur ou undefined
+    return this.http.get<User>(environment.host + "/users?email=" + encodeURI(email) + "&password=" + encodeURI(password)).pipe(      
+      map(user => user != null ? user : new User(0, "", "", "")) // Retourne le premier utilisateur ou undefined
     );
   }
 }

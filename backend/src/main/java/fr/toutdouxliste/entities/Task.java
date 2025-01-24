@@ -40,7 +40,6 @@ public class Task implements Serializable {
     @ManyToOne
     private User owner;
 
-    @JsonIgnore
     @JsonManagedReference
     @ManyToMany(cascade = CascadeType.ALL)
     private Collection<Category> categories;

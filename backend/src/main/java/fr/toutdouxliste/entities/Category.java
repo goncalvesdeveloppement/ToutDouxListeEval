@@ -29,6 +29,7 @@ public class Category implements Serializable {
     @Setter
     private int color;
 
+    @JsonIgnore
     @JsonManagedReference
     @ManyToMany(mappedBy = "categories")
     private Collection<Task> tasks;
