@@ -13,7 +13,8 @@ import java.util.Collection;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Category implements Serializable {
+@Table(name = "`user`")
+public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -24,23 +25,20 @@ public class Category implements Serializable {
     private String name;
 
     @Setter
-    private int color;
+    private String email;
 
-    @ManyToMany(mappedBy = "categories")
+    @Setter
+    private String password;
+
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private Collection<Task> tasks;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User owner;
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    private Collection<Category> categories;
 
-    public Category(String name, int color, User owner) {
+    public User(String name, String email, String password) {
         this.setName(name);
-        this.setColor(color);
-        this.setOwner(owner);
+        this.setEmail(email);
+        this.setPassword(password);
     }
-
-    public Category(String name, int color) {
-        this.setName(name);
-        this.setColor(color);
-    }
-
 }
