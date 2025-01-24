@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit {
   groupedTasks: { [key: string]: Task[] } = {};
   error: string | null = null;
   user: User;
+  searchByKeyword: string = '';
 
   constructor(private api: ApiService, private auth: AuthService, private route: ActivatedRoute) { }
 
@@ -277,5 +278,15 @@ export class DashboardComponent implements OnInit {
     result.setDate(diff);
     result.setHours(0, 0, 0, 0); // Réinitialise l'heure
     return result;
+  }
+
+  //Méthode recherche mot-clé
+  onSearch(searchByKeyword: string){
+    this.searchByKeyword = searchByKeyword;
+    this.filterTasks();
+  }
+
+  filterTasks(){
+    
   }
 }
