@@ -5,16 +5,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.Collection;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Accessors
 public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -28,8 +29,20 @@ public class Category implements Serializable {
     @Setter
     private int color;
 
+    @JsonIgnore
+    @JsonManagedReference
     @ManyToMany(mappedBy = "categories")
     private Collection<Task> tasks;
+
+    @JsonIgnore
+    @ManyToOne
+    private User owner;
+
+    public Category(String name, int color, User owner) {
+        this.setName(name);
+        this.setColor(color);
+        this.setOwner(owner);
+    }
 
     public Category(String name, int color) {
         this.setName(name);

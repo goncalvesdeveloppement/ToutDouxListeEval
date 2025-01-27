@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
   onCredentialsSubmit() {
     this.apiService.getLoggedUser(this.email, this.password).subscribe({
       next: (data) => {
+        console.table(data);
         if (!data) {
           this.loginError = true;
           this.authService.setLoggedUser(null);
@@ -34,7 +35,7 @@ export class LoginComponent implements OnInit {
         }
         else {
           this.loginError = false;
-          this.local.saveData("loggedUser", JSON.stringify(new User(data.id, data.email, data.password, data.name, data.roles)));
+          this.local.saveData("loggedUser", JSON.stringify(new User(data.id, data.email, data.password, data.name)));
           this.authService.setLoggedUser(data);
           this.router.navigateByUrl("/");
         }

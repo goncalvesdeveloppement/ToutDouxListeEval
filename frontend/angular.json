@@ -107,8 +107,5 @@
       }
     }
   },
-  "defaultProject": "toutdouxliste-app",
-  "cli": {
-    "analytics": false
-  }
+  "defaultProject": "toutdouxliste-app"
 }

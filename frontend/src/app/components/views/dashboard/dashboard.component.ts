@@ -21,6 +21,7 @@ export class DashboardComponent implements OnInit {
   groupedTasks: { [key: string]: Task[] } = {};
   error: string | null = null;
   user: User;
+  searchByKeyword: string = '';
 
   constructor(private api: ApiService, private auth: AuthService, private route: ActivatedRoute) { }
 
@@ -32,7 +33,7 @@ export class DashboardComponent implements OnInit {
 
   getAllTasks() {
     this.user = this.auth.loggedUser;
-    this.api.getTasksWithCategories(this.user).subscribe({
+    this.api.getTasks(this.user).subscribe({
       next: (tasks) => {
         this.taskList = tasks; // Assigne le tableau de tâches à taskList
         this.originalTaskList = this.taskList;
@@ -43,6 +44,12 @@ export class DashboardComponent implements OnInit {
       },
       complete: () => {
         console.log('Tâches récupérées avec succès', this.taskList);
+
+        this.taskList.forEach(t => {
+          t.categories.forEach(c => {
+            this.tasksCategories.push(new TaskCategory(t.id, c.id));
+          })
+        }); 
 
         // Appel à getCategories pour récupérer les catégories
         this.api.getCategories(this.user).subscribe({
@@ -55,22 +62,10 @@ export class DashboardComponent implements OnInit {
             this.error = 'Erreur lors de la récupération des catégories';
           },
           complete: () => {
-            // Appel à getTasksCategories pour récupérer les relations tâches-catégories
-            this.api.getTasksCategories().subscribe({
-              next: (tasksCategories) => {
-                this.tasksCategories = tasksCategories; // Assigne les tâches-catégories récupérées
-                console.log('Tâches-Catégories récupérées', this.tasksCategories);
-
-                // Appel de la fonction groupAllTasks pour grouper les tâches
-                if (this.taskList && this.categories && this.tasksCategories) {
-                  this.groupedTasks = this.groupAllTasks((this.currentMode == "week" ? 0 : (this.currentMode == "category" ? 1 : 2)), this.tasksCategories, this.categories);
-                }
-              },
-              error: (err) => {
-                console.error('Erreur lors de la récupération des tâches-catégories :', err);
-                this.error = 'Erreur lors de la récupération des tâches-catégories';
-              },
-            });
+            // Appel de la fonction groupAllTasks pour grouper les tâches
+            if (this.taskList && this.categories && this.tasksCategories) {
+              this.groupedTasks = this.groupAllTasks((this.currentMode == "week" ? 0 : (this.currentMode == "category" ? 1 : 2)), this.tasksCategories, this.categories);
+            }
           }
         });
       }
@@ -271,14 +266,9 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  // Méthode pour obtenir le début de la semaine à partir d'une date
-  private getStartOfWeek(date: Date): Date {
-    const result = new Date(date);
-    const day = result.getDay(); // Jour de la semaine (0 = dimanche, 6 = samedi)
-    const diff = result.getDate() - day + (day === 0 ? -6 : 1); // Ajuste au lundi
-    result.setDate(diff);
-    result.setHours(0, 0, 0, 0); // Réinitialise l'heure
-    return result;
+  //Méthode recherche mot-clé
+  onSearch(searchByKeyword: string) {
+    this.searchByKeyword = searchByKeyword;
   }
 
 // Barre de recherche 1

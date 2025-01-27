@@ -5,17 +5,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Accessors
 public class Task implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -35,7 +36,12 @@ public class Task implements Serializable {
     @Setter
     private String status;
 
-    @ManyToMany
+    @JsonIgnore
+    @ManyToOne
+    private User owner;
+
+    @JsonManagedReference
+    @ManyToMany(cascade = CascadeType.ALL)
     private Collection<Category> categories;
 
     public Task(String name, String description, Date deadline, String status) {
@@ -45,11 +51,12 @@ public class Task implements Serializable {
         this.setStatus(status);
     }
 
-    public Task(String name, String description, Date deadline, String status, Collection<Category> categories) {
+    public Task(String name, String description, Date deadline, String status, Collection<Category> categories, User owner) {
         this.setName(name);
         this.setDescription(description);
         this.setDeadline(deadline);
         this.setStatus(status);
         this.setCategories(categories);
+        this.setOwner(owner);
     }
 }
