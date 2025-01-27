@@ -1,19 +1,22 @@
 <div id="Header">
-    <h1 *ngIf="user.id == 0">Bonjour, cher invité.</h1>
-    <h1 *ngIf="user.id != 0">Bonjour, {{ user.name }}.</h1>
-    <app-sort-switch [currentMode]="currentMode"></app-sort-switch>
+  <h1 *ngIf="user.id == 0">Bonjour, cher invité.</h1>
+  <h1 *ngIf="user.id != 0">Bonjour, {{ user.name }}.</h1>
+  <app-sort-switch [currentMode]="currentMode"></app-sort-switch>
 
-    <app-add-bouton></app-add-bouton>
-    <app-logout-button></app-logout-button>
+<!--  Barre de recherche-->
+  <app-search-bar (search)="onSearch($event)"></app-search-bar>
+
+  <app-add-bouton></app-add-bouton>
+  <app-logout-button></app-logout-button>
 </div>
 
 <div id="Dashboard">
-    <ng-container *ngIf="taskList && taskList.length; else noTasks">
-        <app-dashboard-group *ngFor="let group of groupedTasks | keyvalue" [groupTitle]="group.key"
-            [tasks]="group.value" [ngStyle]="getGroupOrderStyle(group.key)">
-        </app-dashboard-group>
-    </ng-container>
-    <ng-template #noTasks>
-        <p>Aucune tâche à afficher pour le moment.</p>
-    </ng-template>
+  <ng-container *ngIf="taskList && taskList.length; else noTasks">
+    <app-dashboard-group *ngFor="let group of groupedTasks | keyvalue" [groupTitle]="group.key"
+                         [tasks]="group.value" [ngStyle]="getGroupOrderStyle(group.key)">
+    </app-dashboard-group>
+  </ng-container>
+  <ng-template #noTasks>
+    <p>Aucune tâche à afficher pour le moment.</p>
+  </ng-template>
 </div>

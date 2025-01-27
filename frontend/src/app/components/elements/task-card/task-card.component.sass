@@ -15,9 +15,9 @@ div.task-card
     transition: all 0.5s ease
     cursor: pointer
 
-    button 
+    button
         display: none
-    
+
     &:hover
         transform: scale(1.03)
 
@@ -31,10 +31,12 @@ div.task-card
         text-decoration: line-through
         opacity: 0.6
 
+    &.hidden
+      display: none
 
     h5.task-card--title
         font-size: 24px
- 
+
     div.task-card--content
         flex-direction: row
         display: flex
@@ -49,7 +51,7 @@ div.task-card
             span
                 border-radius: 8px
                 padding: 2px 8px
-                font-weight: bold   
+                font-weight: bold
                 font-size: 12px
 
                 &.color1
@@ -127,6 +129,6 @@ div.task-card
 
             span.cancelled
                 color: $purple
-            
+
             span.toolate
                 color: $orange

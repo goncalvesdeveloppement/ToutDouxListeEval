@@ -14,6 +14,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class DashboardComponent implements OnInit {
   taskList: Task[] | undefined = [];
+  originalTaskList: Task[] | undefined = [];
   currentMode: string = "week";
   tasksCategories: TaskCategory[] | undefined = [];
   categories: Category[] | undefined = [];
@@ -34,6 +35,7 @@ export class DashboardComponent implements OnInit {
     this.api.getTasksWithCategories(this.user).subscribe({
       next: (tasks) => {
         this.taskList = tasks; // Assigne le tableau de tâches à taskList
+        this.originalTaskList = this.taskList;
       },
       error: (err) => {
         console.error('Erreur lors de la récupération des tâches :', err);
@@ -278,4 +280,31 @@ export class DashboardComponent implements OnInit {
     result.setHours(0, 0, 0, 0); // Réinitialise l'heure
     return result;
   }
+
+// Barre de recherche 1
+//onSearch(searchQuery: string): void {
+  //if (this.taskList) {
+    //this.taskList = this.taskList.filter(task =>
+      //task.name.toLowerCase().includes(searchQuery.toLowerCase()),
+    //);
+  //}
+//}
+
+// Barre de recherche 2
+onSearch(searchQuery: string): void {
+  if (!searchQuery) {
+    this.taskList = [...this.originalTaskList]; // merci nath ;)
+    return;
+  }
+
+  this.taskList = this.originalTaskList.filter(task =>
+    task.name.toLowerCase().includes(searchQuery.toLowerCase()) || task.description.toLowerCase().includes(searchQuery.toLowerCase()) || task.categories.map(c => c.name).join(",").toLowerCase().includes(searchQuery.toLowerCase()));
+
+  document.querySelectorAll(".task-card").forEach(e => e.classList.add("hidden"));
+
+  this.taskList.forEach(task => {
+      document.getElementById("Task" + task.id).classList.remove("hidden");
+   });
+}
+
 }
