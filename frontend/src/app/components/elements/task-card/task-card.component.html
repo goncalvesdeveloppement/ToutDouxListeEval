@@ -1,4 +1,4 @@
-<div title="{{ description }}" class="task-card" [ngClass]="(cssClass == 'ok' || cssClass == 'cancelled' ? 'ok' : '')"
+<div id="Task{{ id }}" title="{{ description }}" class="task-card" [ngClass]="(cssClass == 'ok' || cssClass == 'cancelled' ? 'ok' : '')"
   routerLink="/task/{{ id }}">
   <h5 class="task-card--title">{{ taskTitle }}</h5>
   <div class="task-card--content">
