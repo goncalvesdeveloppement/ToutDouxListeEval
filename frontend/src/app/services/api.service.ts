@@ -10,62 +10,43 @@ import { TaskCategory } from '../model/task-category.model';
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService {
 
+export class ApiService {
   constructor(private http: HttpClient) { }
 
-  // Crée une nouvelle tâche en base de données (PUT)
-  createTask(task: Task): Observable<Task> {
+  // Crée une nouvelle tâche en base de données (POST)
+  public createTask(task: Task): Observable<Task> {
     return this.http.post<Task>(`${environment.host}/tasks`, task);
   }
 
-  updateTask(task: Task): Observable<Task> {
+  // Modifie une tâche existante (POST)
+  public updateTask(task: Task): Observable<Task> {
     return this.http.put<Task>(`${environment.host}/tasks/${task.id}`, task);
   }
 
-  public getTasksWithCategories(user: User): Observable<Task[]> {
-    return this.http.get<Task[]>(`${environment.host}/tasks?owner=${user.id}`).pipe(
-      switchMap((tasks) => {
-        return this.http.get<any[]>(`${environment.host}/tasks_categories`).pipe(
-          switchMap((taskCategories) => {
-            return this.http.get<Category[]>(`${environment.host}/categories?owner=${user.id}`).pipe(
-              map((categories) => {
-                // Associez les catégories aux tâches
-                tasks.forEach((task: Task) => {
-                  task.categories = taskCategories
-                    .filter((link) => link.taskId === task.id)
-                    .map((link) => categories.find((cat) => cat.id === link.categoryId))
-                    .filter((cat): cat is Category => !!cat); // Filtre les undefined
-                });
-                return tasks;
-              })
-            );
-          })
-        );
-      })
-    );
-  }
-
+  // Récupère les tâches d'un utilisateur
   public getTasks(user: User) {
     return this.http.get<Task[]>(environment.host + "/tasks?owner=" + user.id);
   }
 
+  // Récupère une tâche via son id, si elle correspond à l'utilisateur spécifié
   public getTask(user: User, id: number) {
-    console.table(environment.host + "/tasks?id=" + id + "&owner=" + user.id);
     return this.http.get<Task>(environment.host + "/tasks?id=" + id + "&owner=" + user.id);
   }
 
+  // Récupère toutes les catégories d'un utilisateur
   public getCategories(user: User) {
-    console.table(environment.host + "/categories?owner=" + user.id);
     return this.http.get<Category[]>(environment.host + "/categories?owner=" + user.id);
   }
 
+  // Récupère une catégorie via son id, si elle correspond à l'utilisateur spécifié
   public getCategory(user: User, id: number) {
     return this.http.get<Category>(environment.host + "/categories?id=" + id + "&owner=" + user.id);
   }
 
+  // Récupère l'utilisateur connecté, ou un visiteur
   public getLoggedUser(email: string, password: string) {
-    return this.http.get<User>(environment.host + "/users?email=" + encodeURI(email) + "&password=" + encodeURI(password)).pipe(      
+    return this.http.get<User>(environment.host + "/users?email=" + encodeURI(email) + "&password=" + encodeURI(password)).pipe(
       map(user => user != null ? user : new User(0, "", "", "")) // Retourne le premier utilisateur ou undefined
     );
   }

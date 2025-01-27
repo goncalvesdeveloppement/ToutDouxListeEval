@@ -5,11 +5,11 @@ import { Component, EmbeddedViewRef, HostListener, OnInit } from '@angular/core'
   templateUrl: './add-bouton.component.html',
   styleUrls: ['./add-bouton.component.sass']
 })
+
 export class AddBoutonComponent implements OnInit {
 
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }

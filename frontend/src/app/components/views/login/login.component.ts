@@ -10,6 +10,7 @@ import { StorageService } from 'src/app/services/storage.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.sass']
 })
+
 export class LoginComponent implements OnInit {
   loginError: boolean = false;
   @Input() email: string = "";
@@ -21,15 +22,15 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  // Lors de la soumission des identifiants (tentative de connexion)
   onCredentialsSubmit() {
     this.apiService.getLoggedUser(this.email, this.password).subscribe({
       next: (data) => {
-        console.table(data);
-        if (!data) {
+        if (!data) { // Si aucun utilisateur correspondant
           this.loginError = true;
           this.authService.setLoggedUser(null);
         }
-        else if (data.id == 0) {
+        else if (data.id == 0) { // Si utilisateur 0, équivaut à un visiteur
           this.loginError = true;
           this.authService.setLoggedUser(null);
         }
@@ -40,7 +41,6 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl("/");
         }
       }
-    })
+    });
   }
-
 }

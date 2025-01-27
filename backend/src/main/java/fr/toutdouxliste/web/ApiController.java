@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import fr.toutdouxliste.entities.Category;
 import fr.toutdouxliste.entities.Task;
 import fr.toutdouxliste.entities.User;
-import fr.toutdouxliste.dao.UserRepository;
 import fr.toutdouxliste.service.TaskServiceImpl;
 
 @CrossOrigin(origins = "http://localhost:4200")

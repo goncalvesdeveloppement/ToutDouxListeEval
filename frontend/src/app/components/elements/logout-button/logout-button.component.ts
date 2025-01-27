@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './logout-button.component.html',
   styleUrls: ['./logout-button.component.sass']
 })
+
 export class LogoutButtonComponent implements OnInit {
   user: User;
 
@@ -15,5 +16,4 @@ export class LogoutButtonComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.auth.loggedUser;
   }
-
 }

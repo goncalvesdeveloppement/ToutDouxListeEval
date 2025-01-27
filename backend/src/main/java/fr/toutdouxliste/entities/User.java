@@ -39,10 +39,4 @@ public class User implements Serializable {
     @JsonBackReference
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private Collection<Category> categories;
-
-    public User(String name, String email, String password) {
-        this.setName(name);
-        this.setEmail(email);
-        this.setPassword(password);
-    }
 }

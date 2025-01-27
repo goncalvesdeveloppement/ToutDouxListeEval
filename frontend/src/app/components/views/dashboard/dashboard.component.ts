@@ -12,15 +12,34 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.sass']
 })
+
 export class DashboardComponent implements OnInit {
+
+  // Ensemble de tâches à afficher actuellement
   taskList: Task[] | undefined = [];
+
+  // Ensemble de toutes les tâches de l'utilisateur connecté
   originalTaskList: Task[] | undefined = [];
+
+  // Mode de tri actuel ("week" = semaine, "category", "status" = état)
   currentMode: string = "week";
+
+  // Relations entre les tâches et catégories
   tasksCategories: TaskCategory[] | undefined = [];
+
+  // Catégories de l'utilisateur connecté
   categories: Category[] | undefined = [];
+
+  // Tâches regroupées selon le mode choisi
   groupedTasks: { [key: string]: Task[] } = {};
+
+  // Message d'erreur, le cas échéant
   error: string | null = null;
+
+  // Utilisateur connecté
   user: User;
+
+  // Mot-clé de recherche, le cas échéant
   searchByKeyword: string = '';
 
   constructor(private api: ApiService, private auth: AuthService, private route: ActivatedRoute) { }
@@ -28,43 +47,49 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     if (this.route.snapshot.paramMap.get("mode"))
       this.currentMode = this.route.snapshot.paramMap.get("mode").toLowerCase();
+
     this.getAllTasks();
   }
 
+  // Récupère toutes les tâches pour l'utilisateur connecté, sinon les tâches publiques fictives
   getAllTasks() {
     this.user = this.auth.loggedUser;
+
     this.api.getTasks(this.user).subscribe({
       next: (tasks) => {
         this.taskList = tasks; // Assigne le tableau de tâches à taskList
         this.originalTaskList = this.taskList;
       },
+
       error: (err) => {
         console.error('Erreur lors de la récupération des tâches :', err);
         this.error = 'Erreur lors de la récupération des tâches';
       },
+
       complete: () => {
         console.log('Tâches récupérées avec succès', this.taskList);
 
+        // Récupération des relations tâches/catégories
         this.taskList.forEach(t => {
           t.categories.forEach(c => {
             this.tasksCategories.push(new TaskCategory(t.id, c.id));
           })
-        }); 
+        });
 
-        // Appel à getCategories pour récupérer les catégories
+        // Récupération des catégories de l'utilisateur
         this.api.getCategories(this.user).subscribe({
           next: (categories) => {
             this.categories = categories; // Assigne les catégories récupérées à categories
-            console.log('Catégories récupérées', this.categories);
           },
+
           error: (err) => {
             console.error('Erreur lors de la récupération des catégories :', err);
             this.error = 'Erreur lors de la récupération des catégories';
           },
+
           complete: () => {
-            // Appel de la fonction groupAllTasks pour grouper les tâches
             if (this.taskList && this.categories && this.tasksCategories) {
-              this.groupedTasks = this.groupAllTasks((this.currentMode == "week" ? 0 : (this.currentMode == "category" ? 1 : 2)), this.tasksCategories, this.categories);
+              this.groupedTasks = this.groupAllTasks((this.currentMode == "week" ? 0 : (this.currentMode == "category" ? 1 : 2)), this.tasksCategories, this.categories); // Regroupement de toutes les tâches
             }
           }
         });
@@ -72,8 +97,8 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  // Retourne un style CSS dynamique en fonction de la clé du groupe (groupTitle)
   getGroupOrderStyle(groupTitle: string) {
-    // Retourne un style dynamique en fonction de la clé du groupe (groupTitle)
     switch ((this.currentMode == "week" ? 0 : (this.currentMode == "category" ? 1 : 2))) {
       case 0: // Mode semaine
         return {
@@ -92,25 +117,25 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  // Ordonne les semaines via CSS
   getWeekOrder(weekLabel: string): number {
-    // Logique pour ordonner les semaines
     switch (weekLabel) {
       case 'Cette semaine':
         return 1;
       case 'Semaine prochaine':
         return 2;
       default:
-        // Ordre croissant des semaines
-        return 3;
+        return 3; // Ordre croissant des semaines
     }
   }
 
+  // Renvoie un CSS pour ordonner les catégories via leur numéro de couleur
   getCategoryOrder(categoryName: string): number {
-    // Assurez-vous que vous avez une logique de couleur ou un identifiant unique
     const category = this.categories?.find(cat => cat.name === categoryName);
     return category ? category.color : 0;  // Utiliser colorNumber pour l'ordre
   }
 
+  // Renvoie un CSS pour ordonner les groupes correspondants aux statuts
   getStatusOrder(status: string): number {
     // Ordre des statuts : En cours -> À faire -> Terminé -> Abandonné
     const order = {
@@ -122,17 +147,14 @@ export class DashboardComponent implements OnInit {
     return order[status] || 0; // Par défaut 0 si le statut est inconnu
   }
 
-  groupAllTasks(
-    mode: number = 0,
-    taskCategories: TaskCategory[] = [],
-    categories: Category[] = []
-  ): { [key: string]: Task[] } {
+  // Regroupe les tâches selon le mode de tri choisi
+  groupAllTasks(mode: number = 0, taskCategories: TaskCategory[] = [], categories: Category[] = []): { [key: string]: Task[] } {
     const groupedTasks: { [key: string]: Task[] } = {};
     const now = new Date();
     const threeDaysAgo = new Date();
     threeDaysAgo.setDate(now.getDate() - 3); // 3 jours avant la date actuelle
 
-    // Filtre les tâches selon les règles spécifiées
+    // Filtre les tâches selon les règles spécifiées (exclure terminé/abandonné d'il y a plus de 3 jours)
     const filteredTasks = this.taskList?.filter((task) => {
       const isCompletedOrCancelled = task.status === 'OK' || task.status === 'CANCELLED';
       const isDeadlineBeforeThreeDaysAgo = task.deadline < threeDaysAgo;
@@ -179,9 +201,11 @@ export class DashboardComponent implements OnInit {
             weekLabel = `Semaine du ${weekDate}`;
           }
 
+          // Si aucune tâche pour la semaine en question
           if (!groupedTasks[weekLabel]) {
             groupedTasks[weekLabel] = [];
           }
+
           groupedTasks[weekLabel].push(task);
         });
 
@@ -190,16 +214,17 @@ export class DashboardComponent implements OnInit {
         Object.keys(groupedTasks).sort().forEach((weekLabel) => {
           sortedGroupedByWeek[weekLabel] = sortTasksByDeadline(groupedTasks[weekLabel]);
         });
+
         return sortedGroupedByWeek;
 
       case 1: // Par catégorie
         filteredTasks?.forEach((task) => {
           const taskCategoryLinks = taskCategories.filter((link) => link.taskId === task.id);
-          if (taskCategoryLinks.length === 0) {
-            // Si aucune catégorie associée, ajouter à "Sans catégorie"
+          if (taskCategoryLinks.length === 0) { // Si aucune catégorie associée, ajouter à "Sans catégorie"
             if (!groupedTasks['Sans catégorie']) {
               groupedTasks['Sans catégorie'] = [];
             }
+
             groupedTasks['Sans catégorie'].push(task);
           } else {
             taskCategoryLinks.forEach((link) => {
@@ -219,11 +244,13 @@ export class DashboardComponent implements OnInit {
           .sort((a, b) => {
             const categoryA = categories.find((cat) => cat.name === a);
             const categoryB = categories.find((cat) => cat.name === b);
+
             return (categoryA?.color || 0) - (categoryB?.color || 0); // Trier par couleur
           })
           .forEach((categoryKey) => {
             sortedGroupedByCategory[categoryKey] = sortTasksByDeadline(groupedTasks[categoryKey]);
           });
+
         return sortedGroupedByCategory;
 
       case 2: // Par statut
@@ -231,15 +258,18 @@ export class DashboardComponent implements OnInit {
           const status = (task.status === "PROCESSING" ? "En cours" :
             task.status === "OK" ? "Terminé" :
               task.status === "CANCELLED" ? "Abandonné" : "À faire");
+
           if (!groupedTasks[status]) {
             groupedTasks[status] = [];
           }
+          
           groupedTasks[status].push(task);
         });
 
         // Trier les groupes par statut dans l'ordre spécifié
         const statusOrder = ["En cours", "À faire", "Terminé", "Abandonné"];
         const sortedGroupedByStatus: { [key: string]: Task[] } = {};
+
         statusOrder.forEach((status) => {
           if (groupedTasks[status]) {
             sortedGroupedByStatus[status] = sortTasksByDeadline(groupedTasks[status]);
@@ -248,6 +278,7 @@ export class DashboardComponent implements OnInit {
 
         // Ajout d'un groupe pour les tâches "Terminé" et "Abandonné" qui seront à la fin
         const completedAndCancelledTasks: Task[] = [];
+
         Object.keys(groupedTasks).forEach((status) => {
           if (status === "Terminé" || status === "Abandonné") {
             completedAndCancelledTasks.push(...groupedTasks[status]);
@@ -262,39 +293,27 @@ export class DashboardComponent implements OnInit {
         return sortedGroupedByStatus;
 
       default:
-        throw new Error('Mode non valide. Utilisez 0, 1 ou 2.');
+        throw new Error('Mode non valide.');
     }
   }
 
-  //Méthode recherche mot-clé
-  onSearch(searchByKeyword: string) {
-    this.searchByKeyword = searchByKeyword;
-  }
+  // Barre de recherche
+  onSearch(searchQuery: string): void {
+    if (!searchQuery) {
+      this.taskList = [...this.originalTaskList]; // On copie le tableau initial afin de pouvoir y revenir lorsqu'on n'a aucun terme de recherche
+      return;
+    }
 
-// Barre de recherche 1
-//onSearch(searchQuery: string): void {
-  //if (this.taskList) {
-    //this.taskList = this.taskList.filter(task =>
-      //task.name.toLowerCase().includes(searchQuery.toLowerCase()),
-    //);
-  //}
-//}
+    // On filtre les tâches selon si leurs titre, description ou catégories contiennent le terme recherché
+    this.taskList = this.originalTaskList.filter(task =>
+      task.name.toLowerCase().includes(searchQuery.toLowerCase()) || task.description.toLowerCase().includes(searchQuery.toLowerCase()) || task.categories.map(c => c.name).join(",").toLowerCase().includes(searchQuery.toLowerCase()));
 
-// Barre de recherche 2
-onSearch(searchQuery: string): void {
-  if (!searchQuery) {
-    this.taskList = [...this.originalTaskList]; // merci nath ;)
-    return;
-  }
+    // On masque toutes les tâches par défaut (en CSS)...
+    document.querySelectorAll(".task-card").forEach(e => e.classList.add("hidden"));
 
-  this.taskList = this.originalTaskList.filter(task =>
-    task.name.toLowerCase().includes(searchQuery.toLowerCase()) || task.description.toLowerCase().includes(searchQuery.toLowerCase()) || task.categories.map(c => c.name).join(",").toLowerCase().includes(searchQuery.toLowerCase()));
-
-  document.querySelectorAll(".task-card").forEach(e => e.classList.add("hidden"));
-
-  this.taskList.forEach(task => {
+    // ...pour ne réafficher que celles concernées
+    this.taskList.forEach(task => {
       document.getElementById("Task" + task.id).classList.remove("hidden");
-   });
-}
-
+    });
+  }
 }

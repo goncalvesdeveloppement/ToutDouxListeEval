@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.sass']
 })
+
 export class TaskComponent implements OnInit {
   currentTask: Task;
   isNewTask: boolean = true;
@@ -38,13 +39,13 @@ export class TaskComponent implements OnInit {
 
     // Si l'ID de la tâche existe dans l'URL, on charge les informations de la tâche
     const taskId = this.route.snapshot.paramMap.get('id');
+
     if (taskId) {
       this.getTask(+taskId); // Récupère la tâche existante
       this.isNewTask = false;
     } else {
       // Aucune tâche existante, donc c'est une création
       this.currentTask = new Task(defaultNewId, "", "", new Date(), "TODO", [], ownerId);
-
       this.loadCategories();
     }
   }
@@ -53,19 +54,16 @@ export class TaskComponent implements OnInit {
     this.api.getTask(this.auth.loggedUser, taskId).subscribe({
       next: (tasks) => {
         this.currentTask = tasks[0] ?? undefined; // Assigne le tableau de tâches à taskList
-
       },
+
       error: (err) => {
         console.error('Erreur lors de la récupération de la tâche :', err);
       },
-      complete: () => {
-        console.log(this.currentTask[0]);
 
-        // Appel à getCategories pour récupérer les catégories
+      complete: () => {
         this.api.getCategories(this.auth.loggedUser).subscribe({
           next: (categories) => {
             this.categories = categories; // Assigne les catégories récupérées à categories
-            console.log('Catégories récupérées', this.categories);
           },
           error: (err) => {
             console.error('Erreur lors de la récupération des catégories :', err);
@@ -81,12 +79,13 @@ export class TaskComponent implements OnInit {
                 owner: this.auth.loggedUser.id,
                 categories: this.currentTask.categories?.map(c => c.id) || []
               });
+
               this.selectedCategories = this.currentTask.categories?.map(c => c.id) || [];
             }
+
             this.loadCategories(); // Charge les catégories après avoir chargé la tâche
           }
         });
-
       }
     });
   }
@@ -96,6 +95,7 @@ export class TaskComponent implements OnInit {
       next: (categories) => {
         this.categories = categories;
       },
+
       error: (err) => {
         console.error('Erreur lors de la récupération des catégories :', err);
       }
@@ -108,6 +108,7 @@ export class TaskComponent implements OnInit {
     } else {
       this.selectedCategories.push(categoryId);
     }
+
     this.myForm.get('categories')?.setValue(this.selectedCategories);
   }
 
@@ -135,18 +136,21 @@ export class TaskComponent implements OnInit {
         form.value.owner // ID du propriétaire (transmis automatiquement)
       );
 
+      // Si une tâche existe déjà (ID non null), on effectue une mise à jour
       if (!this.isNewTask) {
-        // Si une tâche existe déjà (ID non null), on effectue une mise à jour
         this.api.updateTask(task).subscribe({
           next: () => {
             this.router.navigateByUrl("/dashboard"); // Redirection après la mise à jour
           },
+
           error: (err) => {
             console.error('Erreur lors de la mise à jour de la tâche :', err);
           }
         });
-      } else {
-        // Si c'est une nouvelle tâche, on la crée
+      } 
+      
+      // Si c'est une nouvelle tâche, on la crée
+      else {
         this.api.createTask(task).subscribe({
           next: () => {
             this.router.navigateByUrl("/dashboard"); // Redirection après la création

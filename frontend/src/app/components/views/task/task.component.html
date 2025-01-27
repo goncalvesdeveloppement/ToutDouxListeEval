@@ -5,6 +5,7 @@
 <div *ngIf="isNewTask">
     <h2>Nouvelle tâche</h2>
 </div>
+
 <form [formGroup]="myForm" (ngSubmit)="onSaveTask(myForm)">
     <div class="form-group">
         <input type="hidden" [value]="currentTask?.id" formControlName="id">
@@ -14,11 +15,13 @@
         <input type="text" placeholder="Description" formControlName="description" required class="form-control"
             [value]="currentTask?.description">
     </div>
+
     <div class="form-group">
         <span>Échéance :</span>
         <input type="datetime-local" placeholder="Date limite" formControlName="deadline" required class="form-control"
             [value]="currentTask?.deadline">
     </div>
+
     <div class="form-group">
         <div class="task-status-selector">
             <div *ngFor="let status of ['TODO', 'PROCESSING', 'OK', 'CANCELLED']" class="status-option"
@@ -30,6 +33,7 @@
             </div>
         </div>
     </div>
+    
     <div class="form-group">
         <label>Catégories :</label>
         <div class="categories-container">

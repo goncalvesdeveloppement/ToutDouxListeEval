@@ -43,20 +43,4 @@ public class Task implements Serializable {
     @JsonManagedReference
     @ManyToMany(cascade = CascadeType.ALL)
     private Collection<Category> categories;
-
-    public Task(String name, String description, Date deadline, String status) {
-        this.setName(name);
-        this.setDescription(description);
-        this.setDeadline(deadline);
-        this.setStatus(status);
-    }
-
-    public Task(String name, String description, Date deadline, String status, Collection<Category> categories, User owner) {
-        this.setName(name);
-        this.setDescription(description);
-        this.setDeadline(deadline);
-        this.setStatus(status);
-        this.setCategories(categories);
-        this.setOwner(owner);
-    }
 }

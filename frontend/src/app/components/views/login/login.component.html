@@ -7,11 +7,11 @@
             name="password">
     </div>
 
+    <!-- Message d'erreur, masqué au début -->
     <div *ngIf="loginError" id="BadCredentials">Veuillez vérifier les informations saisies.</div>
 
     <div class="bottom-buttons">
         <button type="submit" class="btn btn-success">🤵🏻 Connexion</button>
         <button class="secondary" routerLink="/">↩ Retour à l'accueil</button>
-        <!-- <button routerLink="/register" class="btn btn-outline-primary">Créer un compte</button> -->
     </div>
 </form>

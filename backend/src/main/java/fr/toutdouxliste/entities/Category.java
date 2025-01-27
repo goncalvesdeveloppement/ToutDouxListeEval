@@ -37,16 +37,4 @@ public class Category implements Serializable {
     @JsonIgnore
     @ManyToOne
     private User owner;
-
-    public Category(String name, int color, User owner) {
-        this.setName(name);
-        this.setColor(color);
-        this.setOwner(owner);
-    }
-
-    public Category(String name, int color) {
-        this.setName(name);
-        this.setColor(color);
-    }
-
 }

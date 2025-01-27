@@ -10,15 +10,4 @@ export class User {
         this.password = password;
         this.name = name;
     }
-
-    public isAdmin(): boolean {
-        let result: boolean = false;
-
-        // this.roles.forEach(r => {
-        //     if (r == "ADMIN")
-        //         result = true;
-        // });
-
-        return result;
-    }
 }
