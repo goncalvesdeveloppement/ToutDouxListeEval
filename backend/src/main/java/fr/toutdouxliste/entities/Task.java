@@ -1,6 +1,5 @@
 package fr.toutdouxliste.entities;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,8 +9,6 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Data
@@ -31,17 +28,14 @@ public class Task implements Serializable {
     private String description;
 
     @Setter
-    // @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date deadline;
 
     @Setter
     private String status;
 
-     @ManyToOne
-     private User owner;
-    // @JsonManagedReference
+    @ManyToOne
+    private User owner;
 
-    // @JsonManagedReference
-    // @ManyToMany(cascade = CascadeType.ALL)
-    // private Collection<Category> categories;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Collection<Category> categories;
 }

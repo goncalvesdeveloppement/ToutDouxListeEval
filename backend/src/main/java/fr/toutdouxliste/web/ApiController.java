@@ -1,17 +1,14 @@
 package fr.toutdouxliste.web;
 
+import fr.toutdouxliste.dao.CategoryRepository;
 import fr.toutdouxliste.dao.TaskRepository;
+import fr.toutdouxliste.dao.UserRepository;
 import fr.toutdouxliste.entities.Category;
 import fr.toutdouxliste.entities.Task;
 import fr.toutdouxliste.entities.User;
-import fr.toutdouxliste.service.TaskServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
 import java.util.List;
 
 @CrossOrigin("*")
@@ -24,15 +21,41 @@ public class ApiController {
     @Autowired
     private TaskRepository trep;
 
+    @Autowired
+    private UserRepository urep;
+
+    @Autowired
+    private CategoryRepository crep;
+
     @GetMapping("/tasks")
     public List<Task> allTasksFromUser() {
         return trep.findAll();
     }
 
-//    @GetMapping(value = {"/task/{id}"})
-//    public Task taskFromId(@PathVariable Long id) {
-//        return null;
-//    }
+    @GetMapping("/users")
+    public List<User> allUsers() {
+        return urep.findAll();
+    }
+
+    @GetMapping("/categories")
+    public List<Category> allCategories() {
+        return crep.findAll();
+    }
+
+    @GetMapping(value = {"/task/{id}"})
+    public Task taskFromId(@PathVariable Long id) {
+        return null;
+    }
+
+    @GetMapping(value = {"/user/{id}"})
+    public User userFromId(@PathVariable Long id) {
+        return null;
+    }
+
+    @GetMapping(value = {"/category/{id}"})
+    public Category categoryFromId(@PathVariable Long id) {
+        return null;
+    }
 
     // Nouvelle tâche
     @PostMapping("/tasks")
