@@ -1,4 +1,5 @@
 import { Category } from "./category.model";
+import { User } from "./user.model";
 
 export class Task {
     id: number;
@@ -7,9 +8,9 @@ export class Task {
     deadline: Date;
     status: string;
     categories: Category[];
-    owner: number;
+    owner: User;
 
-    constructor(id: number, name: string, description: string, deadline: Date, status: string, categories: Category[] = [], owner: number) {
+    constructor(id: number, name: string, description: string, deadline: Date, status: string, categories: Category[] = [], owner: User) {
         this.id = id;
         this.name = name;
         this.description = description;

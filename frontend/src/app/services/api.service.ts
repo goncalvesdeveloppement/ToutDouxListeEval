@@ -20,7 +20,7 @@ export class ApiService {
   }
 
   updateTask(task: Task): Observable<Task> {
-    return this.http.put<Task>(`${environment.host}/tasks/${task.id}`, task);
+    return this.http.put<Task>(`${environment.host}/tasks`, task);
   }
 
   public getTasksWithCategories(user: User): Observable<Task[]> {

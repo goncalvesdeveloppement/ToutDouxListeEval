@@ -9,5 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
-    List<Task> findByOwner(User user);
+    //List<Task> findByOwner(User user);
 }

@@ -1,10 +1,8 @@
 package fr.toutdouxliste.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -16,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "`user`")
+@ToString(exclude ="tasks")
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -32,13 +31,13 @@ public class User implements Serializable {
     @Setter
     private String password;
 
-    @JsonBackReference
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
-    private Collection<Task> tasks;
+     @OneToMany(mappedBy = "owner")
+     @JsonIgnore
+     private Collection<Task> tasks;
 
-    @JsonBackReference
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
-    private Collection<Category> categories;
+    // @JsonBackReference
+    // @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    // private Collection<Category> categories;
 
     public User(String name, String email, String password) {
         this.setName(name);

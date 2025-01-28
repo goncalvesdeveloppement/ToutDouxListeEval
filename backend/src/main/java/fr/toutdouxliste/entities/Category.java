@@ -1,5 +1,6 @@
 package fr.toutdouxliste.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,24 +30,12 @@ public class Category implements Serializable {
     @Setter
     private int color;
 
-    @JsonIgnore
-    @JsonManagedReference
-    @ManyToMany(mappedBy = "categories")
-    private Collection<Task> tasks;
+    // @JsonIgnore
+    // @JsonBackReference
+    // @ManyToMany(mappedBy = "categories")
+    // private Collection<Task> tasks;
 
-    @JsonIgnore
-    @ManyToOne
-    private User owner;
-
-    public Category(String name, int color, User owner) {
-        this.setName(name);
-        this.setColor(color);
-        this.setOwner(owner);
-    }
-
-    public Category(String name, int color) {
-        this.setName(name);
-        this.setColor(color);
-    }
-
+    // @ManyToOne
+    // @JsonManagedReference
+    // private User owner;
 }

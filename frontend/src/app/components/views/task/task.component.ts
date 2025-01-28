@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors,
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/model/category.model';
 import { Task } from 'src/app/model/task.model';
+import { User } from 'src/app/model/user.model';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -15,7 +16,7 @@ export class TaskComponent implements OnInit {
   currentTask: Task;
   isNewTask: boolean = true;
   categories: Category[];
-  selectedCategories: number[] = [];
+  selectedCategories: Category[] = [];
   myForm: FormGroup;
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private api: ApiService, public auth: AuthService) {
@@ -24,11 +25,11 @@ export class TaskComponent implements OnInit {
 
   ngOnInit(): void {
     let defaultNewId: number = Math.floor(+new Date() / 1000);
-    let ownerId: number = this.auth.loggedUser.id ?? 0;
+    let owner: User = this.auth.loggedUser;
 
     this.myForm = this.fb.group({
       id: [defaultNewId],
-      owner: [ownerId],
+      owner: [owner],
       name: [''],
       description: [''],
       deadline: [''],
@@ -43,7 +44,7 @@ export class TaskComponent implements OnInit {
       this.isNewTask = false;
     } else {
       // Aucune tâche existante, donc c'est une création
-      this.currentTask = new Task(defaultNewId, "", "", new Date(), "TODO", [], ownerId);
+      this.currentTask = new Task(defaultNewId, "", "", new Date(), "TODO", [], owner);
 
       this.loadCategories();
     }
@@ -81,7 +82,7 @@ export class TaskComponent implements OnInit {
                 owner: this.auth.loggedUser.id,
                 categories: this.currentTask.categories?.map(c => c.id) || []
               });
-              this.selectedCategories = this.currentTask.categories?.map(c => c.id) || [];
+              this.selectedCategories = this.currentTask.categories || [];
             }
             this.loadCategories(); // Charge les catégories après avoir chargé la tâche
           }
@@ -102,17 +103,17 @@ export class TaskComponent implements OnInit {
     });
   }
 
-  toggleCategory(categoryId: number): void {
-    if (this.selectedCategories.includes(categoryId)) {
-      this.selectedCategories = this.selectedCategories.filter(id => id !== categoryId);
+  toggleCategory(category: Category): void {
+    if (this.selectedCategories.includes(category)) {
+      this.selectedCategories = this.selectedCategories.filter(c => c.id !== category.id);
     } else {
-      this.selectedCategories.push(categoryId);
+      this.selectedCategories.push(category);
     }
     this.myForm.get('categories')?.setValue(this.selectedCategories);
   }
 
-  isCategorySelected(categoryId: number): boolean {
-    return this.selectedCategories.includes(categoryId);
+  isCategorySelected(category: Category): boolean {
+    return this.selectedCategories.includes(category);
   }
 
   onSaveTask(form: FormGroup) {
@@ -121,15 +122,15 @@ export class TaskComponent implements OnInit {
 
       // Récupère les catégories complètes à partir des IDs sélectionnés
       const selectedCategoryObjects = this.categories.filter(category =>
-        this.selectedCategories.includes(category.id)
+        this.selectedCategories.includes(category)
       );
 
       // Crée l'objet task avec les catégories complètes
       const task = new Task(
-        form.value.id,
+        null,
         form.value.name,
         form.value.description,
-        form.value.deadline,
+        new Date(form.value.deadline + ":00"),
         this.currentTask.status,
         selectedCategoryObjects, // Tableau d'IDs des catégories
         form.value.owner // ID du propriétaire (transmis automatiquement)
