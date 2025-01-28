@@ -1,18 +1,21 @@
-<div title="{{ description }}" class="task-card" [ngClass]="(cssClass == 'ok' || cssClass == 'cancelled' ? 'ok' : '')"
-  routerLink="/task/{{ id }}">
+<div id="Task{{ id }}" title="{{ description }}" class="task-card"
+  [ngClass]="(cssClass == 'ok' || cssClass == 'cancelled' ? 'ok' : '')" routerLink="/task/{{ id }}">
   <h5 class="task-card--title">{{ taskTitle }}</h5>
+
   <div class="task-card--content">
     <div class="task-card--content--left">
       <div *ngFor="let category of categories">
         <span class="category" [ngClass]="'color' + category.color">{{ category.name }}</span>
       </div>
     </div>
+
     <div class="task-card--content--right">
       <div class="buttons">
         <button>
           ⚙ Mettre à jour
         </button>
       </div>
+
       <span *ngIf="cssClass == 'ok'" [ngClass]="cssClass">Terminé.</span>
       <span *ngIf="cssClass == 'cancelled'" [ngClass]="cssClass">Abandonné.</span>
       <span *ngIf="cssClass != 'ok' && cssClass != 'cancelled'" [ngClass]="cssClass">{{ deadlineString }}</span>

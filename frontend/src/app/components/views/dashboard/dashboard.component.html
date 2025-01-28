@@ -1,20 +1,32 @@
-<div id="Header">
-    <h1 *ngIf="user.id == 0">Bonjour, cher invité.</h1>
-    <h1 *ngIf="user.id != 0">Bonjour, {{ user.name }}.</h1>
-    <app-sort-switch [currentMode]="currentMode"></app-sort-switch>
+<header id="Header">
+  <h1 *ngIf="user.id == 0">Bonjour, cher invité.</h1>
+  <h1 *ngIf="user.id != 0">Bonjour, {{ user.name }}.</h1>
 
-    <app-add-bouton></app-add-bouton>
-    <app-logout-button></app-logout-button>
-    <app-search-bar (eventEmitter)="onSearch($event)"></app-search-bar>
-</div>
+  <!-- Sélecteur de mode de tri (semaine, catégories, état) -->
+  <app-sort-switch [currentMode]="currentMode"></app-sort-switch>
 
-<div id="Dashboard">
-    <ng-container *ngIf="taskList && taskList.length; else noTasks">
-        <app-dashboard-group *ngFor="let group of groupedTasks | keyvalue" [groupTitle]="group.key"
-            [tasks]="group.value" [ngStyle]="getGroupOrderStyle(group.key)">
-        </app-dashboard-group>
-    </ng-container>
-    <ng-template #noTasks>
-        <p>Aucune tâche à afficher pour le moment.</p>
-    </ng-template>
-</div>
+  <!-- Barre de recherche -->
+  <app-search-bar (search)="onSearch($event)"></app-search-bar>
+
+  <!-- Bouton d'ajout de nouvelle tâche -->
+  <app-add-bouton></app-add-bouton>
+
+  <!-- Bouton de (dé)connexion -->
+  <app-logout-button></app-logout-button>
+</header>
+
+<!-- Tableau de bord = vue regroupant tous les groupe de tâches -->
+<section id="Dashboard">
+  <ng-container *ngIf="taskList && taskList.length; else noTasks">
+
+    <!-- Groupe de tâches = ensemble de tâches classées ensemble selon le contexte (mode de tri) -->
+    <app-dashboard-group *ngFor="let group of groupedTasks | keyvalue" [groupTitle]="group.key" [tasks]="group.value"
+      [ngStyle]="getGroupOrderStyle(group.key)">
+    </app-dashboard-group>
+  </ng-container>
+
+  <!-- Affiché si aucune tâche à présenter -->
+  <ng-template #noTasks>
+    <p>Aucune tâche à afficher pour le moment.</p>
+  </ng-template>
+</section>

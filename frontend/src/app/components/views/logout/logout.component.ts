@@ -11,10 +11,10 @@ import { StorageService } from 'src/app/services/storage.service';
 export class LogoutComponent implements OnInit {
   constructor(private local: StorageService, private router: Router, private authService: AuthService) { }
 
+  // Déconnecte l'utilisateur puis le redirige automatiquement vers l'accueil visiteur
   ngOnInit(): void {
     this.authService.setLoggedUser(null);
     this.local.saveData("loggedUser", "");
     this.router.navigateByUrl("/");
   }
-
 }

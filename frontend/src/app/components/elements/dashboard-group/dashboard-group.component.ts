@@ -7,9 +7,11 @@ import { Task } from 'src/app/model/task.model';
   templateUrl: './dashboard-group.component.html',
   styleUrls: ['./dashboard-group.component.sass']
 })
+
 export class DashboardGroupComponent implements OnInit {
   @Input() groupTitle: string = '';
   @Input() tasks: Task[] = [];
+
   preparedTasks: {
     id: number;
     name: string;

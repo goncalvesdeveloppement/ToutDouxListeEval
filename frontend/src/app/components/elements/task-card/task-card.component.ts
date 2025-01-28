@@ -6,6 +6,7 @@ import { Category } from 'src/app/model/category.model';
   templateUrl: './task-card.component.html',
   styleUrls: ['./task-card.component.sass']
 })
+
 export class TaskCardComponent implements OnInit {
   now: Date = new Date(Date.now());
   @Input() id: number;
